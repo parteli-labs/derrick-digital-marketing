@@ -1,71 +1,93 @@
-import { DerrickMark } from "./DerrickMark";
+import { Wordmark } from "./Wordmark";
 import { site, footerLinks } from "@/lib/content";
+import { shown } from "@/lib/evidence";
 
 export function Footer() {
+  // Invented contact details are withheld rather than published. If neither
+  // survives, the column is dropped instead of standing empty.
+  const email = shown(site.email);
+  const phone = shown(site.phone);
+
   return (
     <footer className="border-t-[3px] border-lime py-[clamp(44px,6vw,72px)]">
       <div className="mx-auto max-w-[1280px] px-gut">
-        <div className="grid gap-[clamp(24px,4vw,48px)] pb-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_repeat(3,0.8fr)]">
+        <div className="grid gap-[clamp(24px,4vw,48px)] pb-10 lg:grid-cols-[1.1fr_2.2fr]">
           <div>
-            <div className="flex items-center gap-2.5">
-              <DerrickMark className="w-[26px] h-[34px] block shrink-0" />
-              <span className="font-display font-black uppercase leading-[0.82] text-[1.2rem]">
-                <span className="block">Derrick</span>
-                <span className="block text-lime">Digital</span>
-              </span>
-            </div>
-            <p className="mt-4 max-w-[38ch] text-[0.92rem] leading-[1.5] text-muted">
-              Brand growth for the oil patch. Built in Alberta, for companies that sell inside a
-              service radius.
+            <Wordmark />
+            <p className="mt-4 max-w-[38ch] text-body-md leading-[1.5] text-muted">
+              Brand growth for the oil patch. Built in Alberta, for companies
+              that sell inside a service radius.
             </p>
           </div>
 
-          <div>
-            <h5 className="mb-3.5 u-label-sm text-dim">Services</h5>
-            <ul className="flex list-none flex-col gap-2.5 p-0">
-              {footerLinks.services.map((l) => (
-                <li key={l.label}>
-                  <a href={l.href} className="text-[0.88rem] text-muted no-underline transition-colors duration-200 hover:text-lime">
-                    {l.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Column count follows the content: withholding the contact column must
+              not leave a gap where it used to be. */}
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] gap-[clamp(24px,4vw,48px)]">
+            <div>
+              <h2 className="mb-3.5 u-label text-dim">Services</h2>
+              <ul className="flex list-none flex-col p-0">
+                {footerLinks.services.map((l) => (
+                  <li key={l.label}>
+                    <a
+                      href={l.href}
+                      className="block py-1.5 text-body-sm text-muted no-underline transition-colors duration-200 hover:text-lime"
+                    >
+                      {l.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div>
-            <h5 className="mb-3.5 u-label-sm text-dim">Who we work with</h5>
-            <ul className="flex list-none flex-col gap-2.5 p-0">
-              {footerLinks.segments.map((s) => (
-                <li key={s}>
-                  <a href="#contact" className="text-[0.88rem] text-muted no-underline transition-colors duration-200 hover:text-lime">
-                    {s}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+            <div>
+              <h2 className="mb-3.5 u-label text-dim">Who we work with</h2>
+              <ul className="flex list-none flex-col p-0">
+                {footerLinks.segments.map((s) => (
+                  <li key={s}>
+                    <a
+                      href="#contact"
+                      className="block py-1.5 text-body-sm text-muted no-underline transition-colors duration-200 hover:text-lime"
+                    >
+                      {s}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div>
-            <h5 className="mb-3.5 u-label-sm text-dim">Contact</h5>
-            <ul className="flex list-none flex-col gap-2.5 p-0">
-              <li>
-                <a href={`mailto:${site.email}`} className="text-[0.88rem] text-muted no-underline transition-colors duration-200 hover:text-lime">
-                  {site.email}
-                </a>
-              </li>
-              <li>
-                <a href={`tel:${site.phoneHref}`} className="text-[0.88rem] text-muted no-underline transition-colors duration-200 hover:text-lime">
-                  {site.phone}
-                </a>
-              </li>
-            </ul>
+            {(email || phone) && (
+              <div>
+                <h2 className="mb-3.5 u-label text-dim">Contact</h2>
+                <ul className="flex list-none flex-col p-0">
+                  {email && (
+                    <li>
+                      <a
+                        href={`mailto:${email}`}
+                        className="block py-1.5 text-body-sm text-muted no-underline transition-colors duration-200 hover:text-lime"
+                      >
+                        {email}
+                      </a>
+                    </li>
+                  )}
+                  {phone && (
+                    <li>
+                      <a
+                        href={`tel:${phone.href}`}
+                        className="block py-1.5 text-body-sm text-muted no-underline transition-colors duration-200 hover:text-lime"
+                      >
+                        {phone.display}
+                      </a>
+                    </li>
+                  )}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-4 border-t-2 border-field pt-[22px]">
           <span className="u-label-sm text-dim">
-            © {new Date().getFullYear()} {site.name} — {site.region}
+            © {new Date().getFullYear()} {site.name}
           </span>
           <span className="u-label-sm text-dim">53°32′N 113°30′W</span>
         </div>
