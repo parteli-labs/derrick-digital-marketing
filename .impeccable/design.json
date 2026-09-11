@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-12T05:59:21Z",
+  "generatedAt": "2026-09-14T04:44:10Z",
   "title": "Design System: Derrick Digital",
   "extensions": {
     "colorMeta": {
@@ -124,21 +124,6 @@
           "oklch(0.93 0.008 95)"
         ]
       },
-      "lead": {
-        "role": "neutral",
-        "displayName": "Paper Lead",
-        "canonical": "oklch(0.84 0.02 110)",
-        "tonalRamp": [
-          "oklch(0.15 0.006 110)",
-          "oklch(0.26 0.010 110)",
-          "oklch(0.37 0.014 110)",
-          "oklch(0.48 0.017 110)",
-          "oklch(0.59 0.019 110)",
-          "oklch(0.70 0.020 110)",
-          "oklch(0.82 0.017 110)",
-          "oklch(0.93 0.011 110)"
-        ]
-      },
       "muted": {
         "role": "neutral",
         "displayName": "Body Muted",
@@ -248,27 +233,47 @@
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "The single page headline. Sized to dominate the first viewport; never more than one per page."
+        "purpose": "The single page headline. One per page, always exactly two non-wrapping lines, sized to clear the right-hand illustration."
       },
       "headline": {
         "displayName": "Headline",
-        "purpose": "Section openers. One per section, always uppercase."
+        "purpose": "Section openers."
       },
       "title": {
         "displayName": "Title",
-        "purpose": "Card and component titles."
+        "purpose": "Card and component titles, and the card's first-movement figure."
       },
       "body": {
         "displayName": "Body",
-        "purpose": "Default running text."
-      },
-      "body-lead": {
-        "displayName": "Body Lead",
-        "purpose": "The paragraph directly under a headline. Capped at 46ch so it stays a statement."
+        "purpose": "Running text and every form control — 1rem keeps iOS from force-zooming a focused field."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Eyebrows, buttons, field labels, captions, metadata. Always condensed, uppercase and tracked."
+        "purpose": "Eyebrows, buttons, nav."
+      },
+      "figure": {
+        "displayName": "Figure",
+        "purpose": "Big numbers and the three-letter service tags — display weight as a graphic mark."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "The paragraph directly under a headline, capped at 46ch. Never name a colour `lead` again."
+      },
+      "body-md": {
+        "displayName": "Body Medium",
+        "purpose": "Denser supporting tier: card copy, contact promises, confirmations."
+      },
+      "body-sm": {
+        "displayName": "Body Small",
+        "purpose": "Footer links and the brand line under the wordmark."
+      },
+      "label-sm": {
+        "displayName": "Label Small",
+        "purpose": "Captions, metadata, field labels, bullet lists, the origin stamp."
+      },
+      "wordmark": {
+        "displayName": "Wordmark",
+        "purpose": "Fixed lockup size. Not a reading step — it never rescales with the document."
       }
     },
     "shadows": [
@@ -308,16 +313,26 @@
         "name": "dur-reveal",
         "value": "450ms",
         "purpose": "Atmospheric opacity fades in the hero canvas layer."
+      },
+      {
+        "name": "fps-idle",
+        "value": "30",
+        "purpose": "Ambient canvas drift is capped at 30fps and disabled entirely without a fine pointer."
+      },
+      {
+        "name": "hold-between-passes",
+        "value": "1700ms",
+        "purpose": "Stillness after each pass of the shortlist field. Back to back the passes read as a mechanism idling; separated, each reads as an event."
       }
     ],
     "breakpoints": [
       {
-        "name": "stack",
-        "value": "900px"
+        "name": "md",
+        "value": "768px"
       },
       {
-        "name": "narrow",
-        "value": "560px"
+        "name": "lg",
+        "value": "1024px"
       }
     ]
   },
@@ -358,9 +373,9 @@
       "name": "Text Input",
       "kind": "input",
       "refersTo": "input",
-      "description": "Chartreuse condensed label above an ink field. Focus shifts the border to chartreuse — no glow, no ring.",
+      "description": "Ink fill, 2px field-line border, square corners. Set at 1rem so iOS does not force-zoom on focus.",
       "html": "<div class=\"ds-fld\"><label class=\"ds-fld-lab\" for=\"ds-i1\">Company</label><input class=\"ds-input\" id=\"ds-i1\" type=\"text\" placeholder=\"Operating name\"></div>",
-      "css": ".ds-fld{display:flex;flex-direction:column;gap:6px;max-width:280px}.ds-fld-lab{font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.15em;font-size:.72rem;color:#C6F24E}.ds-input{font-family:Barlow,Helvetica,Arial,sans-serif;font-size:.94rem;color:#F2F0E6;background:#0C0D0A;border:2px solid #2E3326;padding:10px 11px;width:100%;transition:border-color .18s}.ds-input:focus{outline:none;border-color:#C6F24E}.ds-input::placeholder{color:#6E7361}"
+      "css": ".ds-fld{display:flex;flex-direction:column;gap:6px;max-width:280px}.ds-fld-lab{font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.15em;font-size:.72rem;color:#C6F24E}.ds-input{font-family:Barlow,Helvetica,Arial,sans-serif;font-size: 1rem;color:#F2F0E6;background:#0C0D0A;border:2px solid #2E3326;padding:10px 11px;width:100%;transition:border-color .18s}.ds-input:focus{outline:none;border-color:#C6F24E}.ds-input::placeholder{color:#6E7361}"
     },
     {
       "name": "Select Field",
@@ -368,7 +383,7 @@
       "refersTo": "input",
       "description": "Native appearance stripped and replaced with an inline chartreuse triangle so selects match text inputs exactly.",
       "html": "<div class=\"ds-fld\"><label class=\"ds-fld-lab\" for=\"ds-s1\">What's this about?</label><select class=\"ds-select\" id=\"ds-s1\"><option>A visibility audit</option><option>Not sure yet</option></select></div>",
-      "css": ".ds-select{font-family:Barlow,Helvetica,Arial,sans-serif;font-size:.94rem;color:#F2F0E6;background-color:#0C0D0A;border:2px solid #2E3326;padding:10px 26px 10px 11px;width:100%;appearance:none;background-repeat:no-repeat;background-position:right 9px center;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7'%3E%3Cpath d='M0 0h10L5 7z' fill='%23C6F24E'/%3E%3C/svg%3E\");transition:border-color .18s}.ds-select:focus{outline:none;border-color:#C6F24E}"
+      "css": ".ds-select{font-family:Barlow,Helvetica,Arial,sans-serif;font-size: 1rem;color:#F2F0E6;background-color:#0C0D0A;border:2px solid #2E3326;padding:10px 26px 10px 11px;width:100%;appearance:none;background-repeat:no-repeat;background-position:right 9px center;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7'%3E%3Cpath d='M0 0h10L5 7z' fill='%23C6F24E'/%3E%3C/svg%3E\");transition:border-color .18s}.ds-select:focus{outline:none;border-color:#C6F24E}"
     },
     {
       "name": "Navigation Link",
@@ -445,6 +460,26 @@
         "name": "The Honest Affordance Rule",
         "body": "If a surface changes on hover, that whole surface must be clickable. A tile that highlights but does nothing is a broken promise — either make the whole thing the control or remove the hover state. Corollary: no interaction may be hover-only; every hover behavior needs a tap or click equivalent.",
         "section": "components"
+      },
+      {
+        "name": "The One Namespace Rule",
+        "body": "A colour and a type step may never share a name. Tailwind's text-* utility serves both --color-* and --text-*, so a colour token named `lead` silently shadowed the `lead` type step and the Lead size never rendered. Audit test: for every --text-<name>, confirm no --color-<name> exists.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Ramp Rule",
+        "body": "A font-size literal in component markup is a defect, not a shortcut. Needed twice, it becomes a named step in @theme; needed once, it snaps to the nearest existing step.",
+        "section": "typography"
+      },
+      {
+        "name": "The Own Ground Rule",
+        "body": "Text never sits on generated artwork and hopes. Either it carries its own opaque ground, or the layout moves it off the artwork entirely. Contrast that depends on where a mark happened to land is not contrast.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Coupled Motion Rule",
+        "body": "When two elements exchange places, their motions must share one easing window. Independent continuous motions in the same frame read as unrelated activity, however well each one is tuned individually.",
+        "section": "elevation"
       }
     ],
     "dos": [
@@ -454,7 +489,12 @@
       "Do let full-bleed color bands carry section rhythm instead of horizontal rules.",
       "Do brighten a component's text along with its surface on hover, so the object responds as a whole.",
       "Do fade atmospheric graphics out with a mask so they dissolve into the ground.",
-      "Do give every hover behavior a click or tap equivalent."
+      "Do give every hover behavior a click or tap equivalent.",
+      "Do resolve every font-size to a named step; promote a size to @theme when it is needed twice, snap it to the nearest step when it is needed once (The One Ramp Rule).",
+      "Do set form controls at a full 1rem so iOS does not force-zoom a focused field.",
+      "Do give any label sitting over the atmospheric field its own opaque ground.",
+      "Do declare each section's data-ground so the separator rule can tell a colour change from a spacing boundary.",
+      "Do separate repeated passes of an ambient animation with a hold; continuous repetition reads as a mechanism rather than an event."
     ],
     "donts": [
       "Don't introduce any border-radius, at any size, anywhere (The Square Corner Rule).",
@@ -464,7 +504,12 @@
       "Don't frame a full-bleed atmospheric canvas in a hard-edged box — a visible rectangle around ambient artwork was explicitly rejected; mask and fade it instead.",
       "Don't build simulated product UI — mock dashboards, fake chat transcripts, fake result panels — to illustrate a claim. This was explicitly rejected as cluttered and artificial.",
       "Don't bookend the page with full-width diagonal stripe bands; that treatment was tried and rejected.",
-      "Don't add intermediate type sizes to soften the jump between display and label. The scale gap is intentional."
+      "Don't add intermediate type sizes to soften the jump between display and label. The scale gap is intentional.",
+      "Don't name a colour token and a type step the same word — Tailwind's text-* utility serves both namespaces and the colour silently wins (The One Namespace Rule).",
+      "Don't unmount a form to show an error. The inputs are uncontrolled; replacing them throws away everything the visitor typed.",
+      "Don't double the section separator by padding both neighbours on a shared ground.",
+      "Don't recompute shadowBlur, or any blur, inside an animation frame.",
+      "Don't animate an exchange as two independent loops; couple the mover and the moved to one easing window."
     ]
   }
 }
