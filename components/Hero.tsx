@@ -1,51 +1,38 @@
-import { CrowdField } from "./CrowdField";
+import { ShortlistField } from "./ShortlistField";
 import { ButtonLink } from "./Button";
 import { hero } from "@/lib/content";
 
 export function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden pt-[clamp(34px,5vw,64px)]">
-      <CrowdField />
-
-      {/* pointer-events pass through to the field; controls opt back in */}
-      <div className="relative z-10 mx-auto max-w-[1280px] px-gut pointer-events-none [&_a]:pointer-events-auto">
-        <div className="mb-[22px] flex flex-wrap items-center gap-3.5">
-          <span className="inline-block -rotate-[2.4deg] border-2 border-orange px-[11px] py-[5px] font-cond text-[0.74rem] font-bold uppercase tracking-[0.16em] text-orange">
-            {hero.stamp}
-          </span>
-          <span className="u-label text-lime">{hero.eyebrow}</span>
-        </div>
-
+    <section id="top" data-ground="ink" className="relative overflow-hidden pt-[clamp(34px,5vw,64px)]">
+      <div className="relative z-10 mx-auto max-w-[1280px] px-gut py-12">
+        {/* Two lines, always. Each line is its own non-wrapping block rather than
+            a <br/> inside a measure, so no viewport can break it into three. The
+            Display step is sized so the longer line clears the illustration. */}
         <h1 className="text-display">
-          Three names
-          <br />
-          come back.
-          <br />
-          <span className="inline-block -skew-x-6 bg-lime px-[0.12em] text-ink">Be one</span>{" "}
-          <span className="text-transparent [-webkit-text-stroke:2px_var(--color-paper)]">
-            of them.
+          <span className="block whitespace-nowrap">Get your name</span>
+          <span className="block whitespace-nowrap">
+            <span className="u-outline">on the shortlist.</span>
           </span>
         </h1>
 
         <div className="pt-8 pb-[clamp(44px,6vw,72px)]">
-          <p className="max-w-[46ch] text-lead text-lead/[1.5]">
+          <p className="max-w-[46ch] text-lead">
             {hero.body}{" "}
             <strong className="font-semibold text-paper">{hero.bodyStrong}</strong>
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <ButtonLink href="#contact">Run my audit →</ButtonLink>
+            <ButtonLink href="#contact">Get in touch →</ButtonLink>
             <ButtonLink href="#shift" variant="ghost">
               What changed
             </ButtonLink>
           </div>
-
-          <p className="mt-[26px] max-w-[44ch] u-label-sm text-dim leading-[1.5]">
-            {hero.caption.before} <b className="font-bold text-lime">{hero.caption.count}</b>{" "}
-            {hero.caption.middle} <b className="font-bold text-lime">{hero.caption.emphasis}</b>.
-          </p>
         </div>
       </div>
+
+      {/* Below the copy on a phone, beside it from md up — see ShortlistField. */}
+      <ShortlistField />
     </section>
   );
 }
