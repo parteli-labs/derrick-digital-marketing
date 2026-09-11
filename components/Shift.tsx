@@ -22,10 +22,9 @@ function Bars({ variant }: { variant: "then" | "now" }) {
 
 export function Shift() {
   return (
-    <section id="shift" className="bg-lime text-ink py-[clamp(44px,6vw,80px)]">
+    <section id="shift" data-ground="lime" className="bg-lime text-ink py-[clamp(44px,6vw,80px)]">
       <div className="mx-auto max-w-[1280px] px-gut">
-        <span className="u-label text-forest">{shift.eyebrow}</span>
-        <h2 className="mt-3 text-headline text-ink">
+        <h2 className="text-headline text-ink">
           {shift.heading[0]}
           <br />
           {shift.heading[1]}
@@ -34,7 +33,7 @@ export function Shift() {
         <div className="mt-8 grid items-center gap-[clamp(24px,4vw,60px)] lg:grid-cols-2">
           <div className="flex flex-col gap-4">
             {shift.paragraphs.map((p, i) => (
-              <p key={i} className="max-w-[48ch] text-[1.02rem] text-on-lime">
+              <p key={i} className="max-w-[48ch] text-lead text-on-lime">
                 {p}
               </p>
             ))}
