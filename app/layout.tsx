@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Big_Shoulders, Barlow, Barlow_Condensed } from "next/font/google";
 import { site } from "@/lib/content";
+import { shown } from "@/lib/evidence";
+import { EvidenceNotice } from "@/components/EvidenceNotice";
 import "./globals.css";
 
 // Google consolidated "Big Shoulders Display" into the variable "Big Shoulders" family.
@@ -8,18 +10,24 @@ const bigShoulders = Big_Shoulders({
   subsets: ["latin"],
   variable: "--font-big-shoulders",
   display: "swap",
+  // next/font has no metric overrides for this family; ours live in globals.css.
+  adjustFontFallback: false,
+  fallback: ["Big Shoulders Fallback", "Arial Narrow", "Impact", "sans-serif"],
 });
 
+// Weights are exactly what the page renders. Barlow 500/700 and Condensed 500
+// were preloaded and never drawn — every `font-bold` in the codebase sits on an
+// element already set in Barlow Condensed.
 const barlow = Barlow({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600"],
   variable: "--font-barlow",
   display: "swap",
 });
 
 const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["600", "700"],
   variable: "--font-barlow-condensed",
   display: "swap",
 });
@@ -73,6 +81,12 @@ export const metadata: Metadata = {
  * whether it can name this company with confidence.
  */
 function StructuredData() {
+  // Only details the client has confirmed are published. Feeding an invented
+  // address or phone number to a generative engine is the precise failure this
+  // site sells against, and it is close to impossible to retract once indexed.
+  const email = shown(site.email);
+  const phone = shown(site.phone);
+
   const json = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
@@ -80,8 +94,8 @@ function StructuredData() {
     name: site.name,
     description,
     url: site.url,
-    email: site.email,
-    telephone: site.phone,
+    ...(email ? { email } : {}),
+    ...(phone ? { telephone: phone.href } : {}),
     areaServed: [
       { "@type": "AdministrativeArea", name: "Alberta" },
       { "@type": "AdministrativeArea", name: "British Columbia" },
@@ -118,6 +132,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {children}
         <StructuredData />
+        <EvidenceNotice />
       </body>
     </html>
   );
