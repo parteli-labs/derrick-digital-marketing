@@ -101,15 +101,15 @@ Real and usable:
 
 - The client's oilfield background (confirmed) — the basis of the positioning claim.
 - The incumbent Wix site's copy and segment list.
+- The statistics band: `312` buyer prompts per audit, `5` engines monitored, and `0`
+  annual contracts. Authored as placeholders and since confirmed by the client, so they
+  publish. They carry `confirmed(...)` in `lib/content.ts`.
 
 **Placeholders currently on the page that must not be treated as evidence.** These
 were authored to make the design concrete and are not client-supplied:
 
-- `312` buyer prompts per audit — placeholder.
-- `5` engines monitored — placeholder.
 - "Roughly `400`" Alberta service companies — placeholder.
 - "Reply in 1 business day" — unverified service promise.
-- "0 annual contracts" — unverified commercial term.
 - Contact details `hello@derrickdigital.ca` and `(780) 555-0142` — **invented**.
 - The logo mark currently rendered is a **reconstructed SVG**, not the client's asset.
   The real file has not been supplied.
