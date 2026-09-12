@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Derrick Digital — "The Safety Placard"
+   Token source of truth. Mirrors DESIGN.md; keep the two in sync.
+   ========================================================================== */
+
+@theme {
+  /* ---- ground ---- */
+  --color-ink: #0c0d0a;
+  --color-ink-2: #14160f;
+  --color-field: #2e3326;
+
+  /* ---- logo green ---- */
+  --color-forest: #1b3a28;
+  --color-forest-2: #24513a;
+
+  /* ---- signals ---- */
+  --color-lime: #c6f24e;
+  --color-orange: #ff5a1f;
+
+  /* ---- marks ---- */
+  --color-paper: #f2f0e6;
+  --color-lead: #cfd2be;
+  --color-muted: #b9bca6;
+  --color-muted-2: #d6d9c4;
+  --color-sage: #9fc0ac;
+  --color-dim: #8d9179;
+  --color-on-lime: #1a2010;
+  --color-on-lime-2: #2c3520;
+  --color-placeholder: #6e7361;
+
+  /* ---- type families ---- */
+  --font-display: var(--font-big-shoulders), "Arial Narrow", Impact, sans-serif;
+  --font-body: var(--font-barlow), "Helvetica Neue", Arial, sans-serif;
+  --font-cond: var(--font-barlow-condensed), "Arial Narrow", sans-serif;
+
+  /* ---- type scale: eight steps, consolidated from sixteen ---- */
+  --text-display: clamp(2.9rem, 9.4vw, 7.8rem);
+  --text-display--line-height: 0.86;
+  --text-headline: clamp(2.2rem, 5.6vw, 4.2rem);
+  --text-headline--line-height: 0.86;
+  --text-figure: clamp(2.1rem, 4vw, 3.1rem);
+  --text-figure--line-height: 0.82;
+  --text-title: clamp(1.35rem, 2.2vw, 1.7rem);
+  --text-title--line-height: 0.92;
+  --text-lead: clamp(1.05rem, 1.5vw, 1.3rem);
+  --text-lead--line-height: 1.5;
+  --text-body: 1rem;
+  --text-body--line-height: 1.55;
+  --text-label: 0.82rem;
+  --text-label--line-height: 1.2;
+  --text-label-sm: 0.72rem;
+  --text-label-sm--line-height: 1.4;
+
+  /* ---- layout ---- */
+  --spacing-gut: clamp(18px, 4vw, 56px);
+  --spacing-section: clamp(48px, 7vw, 96px);
+
+  /* ---- motion (see DESIGN.md sidecar) ---- */
+  --ease-enter: cubic-bezier(0.2, 0.7, 0.3, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 0.7, 0.2);
+}
+
+/* The Square Corner Rule — no radius anywhere, ever. */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-radius: 0 !important;
+  }
+
+  html {
+    background: var(--color-ink);
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--color-lime);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-lime);
+    outline-offset: 2px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.004em;
+    text-wrap: balance;
+  }
+
+  ::placeholder {
+    color: var(--color-placeholder);
+  }
+
+  /* The masthead is sticky at 73px (70 + its 3px rule). Without this, every
+     in-page anchor lands with its heading hidden underneath it. */
+  [id] {
+    scroll-margin-top: 5.5rem;
+  }
+}
+
+@layer components {
+  /* The Tracked Capitals Rule — condensed, uppercase, always tracked. */
+  .u-label {
+    font-family: var(--font-cond);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: var(--text-label);
+  }
+
+  .u-label-sm {
+    font-family: var(--font-cond);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: var(--text-label-sm);
+  }
+
+  /* The field layer dissolves at every edge — never a hard-edged box. */
+  .u-field-mask {
+    -webkit-mask-image: radial-gradient(
+      ellipse 60% 66% at 52% 50%,
+      #000 30%,
+      rgba(0, 0, 0, 0.6) 60%,
+      transparent 84%
+    );
+    mask-image: radial-gradient(
+      ellipse 60% 66% at 52% 50%,
+      #000 30%,
+      rgba(0, 0, 0, 0.6) 60%,
+      transparent 84%
+    );
+  }
+}

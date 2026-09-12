@@ -1,0 +1,470 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-12T05:59:21Z",
+  "title": "Design System: Derrick Digital",
+  "extensions": {
+    "colorMeta": {
+      "lime": {
+        "role": "primary",
+        "displayName": "Safety Chartreuse",
+        "canonical": "oklch(0.91 0.19 122)",
+        "tonalRamp": [
+          "oklch(0.15 0.057 122)",
+          "oklch(0.26 0.095 122)",
+          "oklch(0.37 0.133 122)",
+          "oklch(0.48 0.162 122)",
+          "oklch(0.59 0.180 122)",
+          "oklch(0.70 0.190 122)",
+          "oklch(0.82 0.162 122)",
+          "oklch(0.93 0.105 122)"
+        ]
+      },
+      "orange": {
+        "role": "secondary",
+        "displayName": "Hazard Orange",
+        "canonical": "oklch(0.67 0.21 38)",
+        "tonalRamp": [
+          "oklch(0.15 0.063 38)",
+          "oklch(0.26 0.105 38)",
+          "oklch(0.37 0.147 38)",
+          "oklch(0.48 0.178 38)",
+          "oklch(0.59 0.199 38)",
+          "oklch(0.70 0.210 38)",
+          "oklch(0.82 0.178 38)",
+          "oklch(0.93 0.116 38)"
+        ]
+      },
+      "forest": {
+        "role": "neutral",
+        "displayName": "Forest",
+        "canonical": "oklch(0.31 0.06 158)",
+        "tonalRamp": [
+          "oklch(0.15 0.018 158)",
+          "oklch(0.26 0.030 158)",
+          "oklch(0.37 0.042 158)",
+          "oklch(0.48 0.051 158)",
+          "oklch(0.59 0.057 158)",
+          "oklch(0.70 0.060 158)",
+          "oklch(0.82 0.051 158)",
+          "oklch(0.93 0.033 158)"
+        ]
+      },
+      "forest-2": {
+        "role": "neutral",
+        "displayName": "Forest Lift",
+        "canonical": "oklch(0.39 0.07 158)",
+        "tonalRamp": [
+          "oklch(0.15 0.021 158)",
+          "oklch(0.26 0.035 158)",
+          "oklch(0.37 0.049 158)",
+          "oklch(0.48 0.060 158)",
+          "oklch(0.59 0.067 158)",
+          "oklch(0.70 0.070 158)",
+          "oklch(0.82 0.060 158)",
+          "oklch(0.93 0.039 158)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(0.14 0.01 130)",
+        "tonalRamp": [
+          "oklch(0.15 0.004 130)",
+          "oklch(0.26 0.006 130)",
+          "oklch(0.37 0.008 130)",
+          "oklch(0.48 0.010 130)",
+          "oklch(0.59 0.011 130)",
+          "oklch(0.70 0.012 130)",
+          "oklch(0.82 0.010 130)",
+          "oklch(0.93 0.007 130)"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Ink Raised",
+        "canonical": "oklch(0.18 0.014 130)",
+        "tonalRamp": [
+          "oklch(0.15 0.004 130)",
+          "oklch(0.26 0.007 130)",
+          "oklch(0.37 0.010 130)",
+          "oklch(0.48 0.012 130)",
+          "oklch(0.59 0.013 130)",
+          "oklch(0.70 0.014 130)",
+          "oklch(0.82 0.012 130)",
+          "oklch(0.93 0.008 130)"
+        ]
+      },
+      "field": {
+        "role": "neutral",
+        "displayName": "Field Line",
+        "canonical": "oklch(0.28 0.02 130)",
+        "tonalRamp": [
+          "oklch(0.15 0.006 130)",
+          "oklch(0.26 0.010 130)",
+          "oklch(0.37 0.014 130)",
+          "oklch(0.48 0.017 130)",
+          "oklch(0.59 0.019 130)",
+          "oklch(0.70 0.020 130)",
+          "oklch(0.82 0.017 130)",
+          "oklch(0.93 0.011 130)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "oklch(0.95 0.015 95)",
+        "tonalRamp": [
+          "oklch(0.15 0.004 95)",
+          "oklch(0.26 0.007 95)",
+          "oklch(0.37 0.010 95)",
+          "oklch(0.48 0.013 95)",
+          "oklch(0.59 0.014 95)",
+          "oklch(0.70 0.015 95)",
+          "oklch(0.82 0.013 95)",
+          "oklch(0.93 0.008 95)"
+        ]
+      },
+      "lead": {
+        "role": "neutral",
+        "displayName": "Paper Lead",
+        "canonical": "oklch(0.84 0.02 110)",
+        "tonalRamp": [
+          "oklch(0.15 0.006 110)",
+          "oklch(0.26 0.010 110)",
+          "oklch(0.37 0.014 110)",
+          "oklch(0.48 0.017 110)",
+          "oklch(0.59 0.019 110)",
+          "oklch(0.70 0.020 110)",
+          "oklch(0.82 0.017 110)",
+          "oklch(0.93 0.011 110)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Body Muted",
+        "canonical": "oklch(0.77 0.02 115)",
+        "tonalRamp": [
+          "oklch(0.15 0.006 115)",
+          "oklch(0.26 0.010 115)",
+          "oklch(0.37 0.014 115)",
+          "oklch(0.48 0.017 115)",
+          "oklch(0.59 0.019 115)",
+          "oklch(0.70 0.020 115)",
+          "oklch(0.82 0.017 115)",
+          "oklch(0.93 0.011 115)"
+        ]
+      },
+      "muted-2": {
+        "role": "neutral",
+        "displayName": "Body Muted Lift",
+        "canonical": "oklch(0.86 0.02 115)",
+        "tonalRamp": [
+          "oklch(0.15 0.006 115)",
+          "oklch(0.26 0.010 115)",
+          "oklch(0.37 0.014 115)",
+          "oklch(0.48 0.017 115)",
+          "oklch(0.59 0.019 115)",
+          "oklch(0.70 0.020 115)",
+          "oklch(0.82 0.017 115)",
+          "oklch(0.93 0.011 115)"
+        ]
+      },
+      "sage": {
+        "role": "neutral",
+        "displayName": "Sage Muted",
+        "canonical": "oklch(0.76 0.04 155)",
+        "tonalRamp": [
+          "oklch(0.15 0.012 155)",
+          "oklch(0.26 0.020 155)",
+          "oklch(0.37 0.028 155)",
+          "oklch(0.48 0.034 155)",
+          "oklch(0.59 0.038 155)",
+          "oklch(0.70 0.040 155)",
+          "oklch(0.82 0.034 155)",
+          "oklch(0.93 0.022 155)"
+        ]
+      },
+      "dim": {
+        "role": "neutral",
+        "displayName": "Dim",
+        "canonical": "oklch(0.62 0.03 115)",
+        "tonalRamp": [
+          "oklch(0.15 0.009 115)",
+          "oklch(0.26 0.015 115)",
+          "oklch(0.37 0.021 115)",
+          "oklch(0.48 0.025 115)",
+          "oklch(0.59 0.028 115)",
+          "oklch(0.70 0.030 115)",
+          "oklch(0.82 0.025 115)",
+          "oklch(0.93 0.017 115)"
+        ]
+      },
+      "on-lime": {
+        "role": "neutral",
+        "displayName": "Ink on Chartreuse",
+        "canonical": "oklch(0.20 0.03 130)",
+        "tonalRamp": [
+          "oklch(0.15 0.009 130)",
+          "oklch(0.26 0.015 130)",
+          "oklch(0.37 0.021 130)",
+          "oklch(0.48 0.025 130)",
+          "oklch(0.59 0.028 130)",
+          "oklch(0.70 0.030 130)",
+          "oklch(0.82 0.025 130)",
+          "oklch(0.93 0.017 130)"
+        ]
+      },
+      "on-lime-2": {
+        "role": "neutral",
+        "displayName": "Ink on Chartreuse Muted",
+        "canonical": "oklch(0.29 0.03 130)",
+        "tonalRamp": [
+          "oklch(0.15 0.009 130)",
+          "oklch(0.26 0.015 130)",
+          "oklch(0.37 0.021 130)",
+          "oklch(0.48 0.025 130)",
+          "oklch(0.59 0.028 130)",
+          "oklch(0.70 0.030 130)",
+          "oklch(0.82 0.025 130)",
+          "oklch(0.93 0.017 130)"
+        ]
+      },
+      "placeholder": {
+        "role": "neutral",
+        "displayName": "Placeholder",
+        "canonical": "oklch(0.51 0.02 115)",
+        "tonalRamp": [
+          "oklch(0.15 0.006 115)",
+          "oklch(0.26 0.010 115)",
+          "oklch(0.37 0.014 115)",
+          "oklch(0.48 0.017 115)",
+          "oklch(0.59 0.019 115)",
+          "oklch(0.70 0.020 115)",
+          "oklch(0.82 0.017 115)",
+          "oklch(0.93 0.011 115)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The single page headline. Sized to dominate the first viewport; never more than one per page."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section openers. One per section, always uppercase."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Card and component titles."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default running text."
+      },
+      "body-lead": {
+        "displayName": "Body Lead",
+        "purpose": "The paragraph directly under a headline. Capped at 46ch so it stays a statement."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Eyebrows, buttons, field labels, captions, metadata. Always condensed, uppercase and tracked."
+      }
+    },
+    "shadows": [
+      {
+        "name": "hard-offset",
+        "value": "4px 4px 0 #24513A",
+        "purpose": "Primary button hover only. Zero blur, zero spread — a printed graphic offset, not simulated light. The system's only shadow."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-enter",
+        "value": "cubic-bezier(.2,.7,.3,1)",
+        "purpose": "Opening, expanding and revealing. Drawer open (260ms) and the disclosure indicator (250ms)."
+      },
+      {
+        "name": "ease-exit",
+        "value": "cubic-bezier(.4,0,.7,.2)",
+        "purpose": "Closing and collapsing. Drawer close (210ms) — faster out than in."
+      },
+      {
+        "name": "dur-press",
+        "value": "120ms",
+        "purpose": "Button transform on hover. Fast enough to feel mechanical."
+      },
+      {
+        "name": "dur-state",
+        "value": "180ms",
+        "purpose": "Color, background and border-color state changes across all controls."
+      },
+      {
+        "name": "dur-surface",
+        "value": "200ms",
+        "purpose": "Card background, border and lift."
+      },
+      {
+        "name": "dur-reveal",
+        "value": "450ms",
+        "purpose": "Atmospheric opacity fades in the hero canvas layer."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "stack",
+        "value": "900px"
+      },
+      {
+        "name": "narrow",
+        "value": "560px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The go signal. Chartreuse fill, square corners, lifts into a hard offset shadow on hover.",
+      "html": "<a class=\"ds-btn\" href=\"#\">Run my audit <span aria-hidden=\"true\">&rarr;</span></a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;gap:9px;text-decoration:none;cursor:pointer;font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.13em;font-size:.88rem;padding:13px 22px;border:3px solid #C6F24E;background:#C6F24E;color:#0C0D0A;transition:transform .12s,background .18s,color .18s}.ds-btn:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 #24513A}.ds-btn:focus-visible{outline:3px solid #C6F24E;outline-offset:2px}.ds-btn:active{transform:translate(0,0);box-shadow:none}"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary action. A ghost becomes a primary on hover rather than merely brightening.",
+      "html": "<a class=\"ds-btn-ghost\" href=\"#\">What changed</a>",
+      "css": ".ds-btn-ghost{display:inline-flex;align-items:center;gap:9px;text-decoration:none;cursor:pointer;font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.13em;font-size:.88rem;padding:13px 22px;border:3px solid #C6F24E;background:transparent;color:#C6F24E;transition:transform .12s,background .18s,color .18s}.ds-btn-ghost:hover{background:#C6F24E;color:#0C0D0A;transform:translate(-2px,-2px);box-shadow:4px 4px 0 #24513A}.ds-btn-ghost:focus-visible{outline:3px solid #C6F24E;outline-offset:2px}"
+    },
+    {
+      "name": "Service Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "The primary content object. Whole surface is the click target; text brightens with the surface so the card responds as one thing.",
+      "html": "<div class=\"ds-card\"><div class=\"ds-card-tag\">GEO</div><h3 class=\"ds-card-title\">Generative Engine Optimization</h3><p class=\"ds-card-body\">We baseline what assistants say about you, then rebuild the evidence trail underneath it.</p><div class=\"ds-card-foot\"><span>First movement</span><b>45&ndash;90 days</b></div></div>",
+      "css": ".ds-card{border:3px solid #F2F0E6;background:#14160F;padding:22px 20px 24px;display:flex;flex-direction:column;gap:12px;cursor:pointer;max-width:300px;transition:background .2s,border-color .2s,transform .15s}.ds-card:hover{background:#1B3A28;border-color:#C6F24E;transform:translateY(-4px)}.ds-card-tag{font-family:'Big Shoulders','Arial Narrow',Impact,sans-serif;font-weight:900;font-size:2.6rem;line-height:.8;color:#C6F24E}.ds-card-title{margin:0;font-family:'Big Shoulders','Arial Narrow',Impact,sans-serif;font-weight:900;text-transform:uppercase;line-height:.86;font-size:1.45rem;color:#F2F0E6}.ds-card-body{margin:0;font-family:Barlow,Helvetica,Arial,sans-serif;font-size:.92rem;line-height:1.5;color:#B9BCA6;transition:color .2s}.ds-card:hover .ds-card-body{color:#D6D9C4}.ds-card-foot{margin-top:auto;padding-top:15px;border-top:2px solid #2E3326;display:flex;justify-content:space-between;align-items:baseline;gap:10px;transition:border-color .2s}.ds-card:hover .ds-card-foot{border-top-color:rgba(198,242,78,.4)}.ds-card-foot span{font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;color:#8D9179}.ds-card-foot b{font-family:'Big Shoulders','Arial Narrow',Impact,sans-serif;font-weight:900;font-size:1.6rem;line-height:1;color:#C6F24E;white-space:nowrap}"
+    },
+    {
+      "name": "Disclosure Toggle",
+      "kind": "custom",
+      "refersTo": "drawer-summary",
+      "description": "Signature component. Reads as a control, not a link — fills solid chartreuse on hover or keyboard focus. The plus indicator loses its vertical stroke when open.",
+      "html": "<div class=\"ds-drawer\"><button class=\"ds-drawer-sum\" type=\"button\">What is GEO?<span class=\"ds-chev\" aria-hidden=\"true\"></span></button></div>",
+      "css": ".ds-drawer-sum{display:flex;align-items:center;gap:10px;width:100%;cursor:pointer;padding:11px 13px;border:2px solid rgba(198,242,78,.38);background:transparent;font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:.76rem;color:#C6F24E;transition:background .18s,color .18s,border-color .18s}.ds-drawer-sum:hover,.ds-drawer-sum:focus-visible{background:#C6F24E;color:#0C0D0A;outline:none}.ds-chev{margin-left:auto;position:relative;width:11px;height:11px;flex:0 0 auto}.ds-chev::before,.ds-chev::after{content:'';position:absolute;background:currentColor;transition:transform .25s cubic-bezier(.2,.7,.3,1)}.ds-chev::before{left:0;right:0;top:5px;height:2px}.ds-chev::after{top:0;bottom:0;left:5px;width:2px}"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Chartreuse condensed label above an ink field. Focus shifts the border to chartreuse — no glow, no ring.",
+      "html": "<div class=\"ds-fld\"><label class=\"ds-fld-lab\" for=\"ds-i1\">Company</label><input class=\"ds-input\" id=\"ds-i1\" type=\"text\" placeholder=\"Operating name\"></div>",
+      "css": ".ds-fld{display:flex;flex-direction:column;gap:6px;max-width:280px}.ds-fld-lab{font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.15em;font-size:.72rem;color:#C6F24E}.ds-input{font-family:Barlow,Helvetica,Arial,sans-serif;font-size:.94rem;color:#F2F0E6;background:#0C0D0A;border:2px solid #2E3326;padding:10px 11px;width:100%;transition:border-color .18s}.ds-input:focus{outline:none;border-color:#C6F24E}.ds-input::placeholder{color:#6E7361}"
+    },
+    {
+      "name": "Select Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Native appearance stripped and replaced with an inline chartreuse triangle so selects match text inputs exactly.",
+      "html": "<div class=\"ds-fld\"><label class=\"ds-fld-lab\" for=\"ds-s1\">What's this about?</label><select class=\"ds-select\" id=\"ds-s1\"><option>A visibility audit</option><option>Not sure yet</option></select></div>",
+      "css": ".ds-select{font-family:Barlow,Helvetica,Arial,sans-serif;font-size:.94rem;color:#F2F0E6;background-color:#0C0D0A;border:2px solid #2E3326;padding:10px 26px 10px 11px;width:100%;appearance:none;background-repeat:no-repeat;background-position:right 9px center;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7'%3E%3Cpath d='M0 0h10L5 7z' fill='%23C6F24E'/%3E%3C/svg%3E\");transition:border-color .18s}.ds-select:focus{outline:none;border-color:#C6F24E}"
+    },
+    {
+      "name": "Navigation Link",
+      "kind": "nav",
+      "refersTo": "drawer-summary",
+      "description": "Condensed tracked capitals, dim at rest, chartreuse on hover. Right-justified against the primary button.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\">The Shift</a><a href=\"#\">What We Do</a><a href=\"#\">Contact</a></nav>",
+      "css": ".ds-nav{display:flex;gap:22px;background:#0C0D0A;padding:14px 16px;border-bottom:3px solid #C6F24E}.ds-nav a{font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.14em;font-size:.82rem;color:#B9BCA6;text-decoration:none;transition:color .18s}.ds-nav a:hover{color:#C6F24E}.ds-nav a:focus-visible{outline:3px solid #C6F24E;outline-offset:2px}"
+    },
+    {
+      "name": "Eyebrow Label",
+      "kind": "chip",
+      "refersTo": "drawer-summary",
+      "description": "Section marker. Chartreuse condensed capitals at 0.18em tracking — the system's most repeated small element.",
+      "html": "<span class=\"ds-eyebrow\">Scope of Work</span>",
+      "css": ".ds-eyebrow{display:inline-block;font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.18em;font-size:.78rem;color:#C6F24E}"
+    },
+    {
+      "name": "Stat Figure",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "A number in display weight over a condensed caption. The pairing that carries every proof point on the page.",
+      "html": "<div class=\"ds-stat\"><b>312</b><span>Buyer prompts per audit</span></div>",
+      "css": ".ds-stat{background:#1B3A28;padding:24px 20px;display:inline-block;min-width:190px}.ds-stat b{display:block;font-family:'Big Shoulders','Arial Narrow',Impact,sans-serif;font-weight:900;font-size:3.4rem;line-height:.82;color:#C6F24E}.ds-stat span{display:block;margin-top:10px;font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.14em;font-size:.8rem;color:#9FC0AC}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Safety Placard",
+    "overview": "This system borrows the visual language of worksite signage: the hi-vis vest, the hazard placard, the equipment tag bolted to a skid. Everything is built to be read at a glance, in bad light, by someone who is busy and not inclined to be sold to. That constraint produces the whole aesthetic — maximum contrast, heavy condensed capitals, flat opaque surfaces, no ornament that does not carry information.\n\nThe audience is Alberta oilfield and energy operators. They are surrounded by this language every day, so it reads as native rather than as a theme. The system earns credibility the way the copy does: by being fluent rather than by claiming fluency. A softer, more conventional agency look would read as an outsider's guess at the industry; this reads like it came from inside it.\n\nDensity is deliberately uneven. Headline type is enormous and crowds the viewport; supporting text is small, tight and workmanlike. The gap between those two scales is the drama in the system — there is almost nothing in the middle. The logo is a fixed inherited asset and the palette carries green to match it, which is why the darkest neutrals are green-biased rather than true black.",
+    "keyCharacteristics": [
+      "Hi-vis chartreuse against near-black, with hazard orange as a second signal",
+      "Zero corner radius anywhere in the system",
+      "Heavy condensed display capitals against small tracked condensed labels",
+      "Flat surfaces at rest; depth appears only as a response to interaction",
+      "Structural borders at 3px, control borders at 2px — borders do the work shadows usually do"
+    ],
+    "rules": [
+      {
+        "name": "The Ten Percent Rule",
+        "body": "No viewport is more than roughly ten percent Safety Chartreuse. Its authority comes entirely from its rarity; a page that is 30% chartreuse has no accent at all, only noise. Audit test: squint at any screen — if more than one element shouts, cut until one does.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Signals Rule",
+        "body": "Chartreuse means go, press, this is live. Orange means look out, this is the problem. The two never swap jobs and orange never appears on a call to action. Orange may be used generously in graphic and editorial roles; it may never be used to invite a click.",
+        "section": "colors"
+      },
+      {
+        "name": "The Green Ground Rule",
+        "body": "Neutrals are biased green, never neutral grey and never true black. The logo is fixed and inherited; the palette bends toward it so the mark never looks pasted on.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Registers Rule",
+        "body": "Type is either very large or very small; the middle is almost empty. A headline and its label can sit inches apart in scale and still feel like one system. Resist introducing intermediate sizes to bridge them — the gap is the design.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tracked Capitals Rule",
+        "body": "All uppercase text is condensed and tracked to at least 0.10em, and 0.13–0.24em for anything under 0.8rem. Untracked small capitals are illegible and instantly read as an error. Running body copy is never uppercase.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-At-Rest Rule",
+        "body": "Shadows are a response to interaction, never a property of a surface. If an element is not being touched, it is flat. Any blurred or ambient shadow is outside this system.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Square Corner Rule",
+        "body": "No radius. Not on buttons, not on tags, not on images, not just a little on inputs. The square corner is load-bearing identity; one rounded element makes the whole page look like a different template.",
+        "section": "shapes"
+      },
+      {
+        "name": "The Honest Affordance Rule",
+        "body": "If a surface changes on hover, that whole surface must be clickable. A tile that highlights but does nothing is a broken promise — either make the whole thing the control or remove the hover state. Corollary: no interaction may be hover-only; every hover behavior needs a tap or click equivalent.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Do keep Safety Chartreuse under roughly 10% of any viewport (The Ten Percent Rule).",
+      "Do use the two border tiers meaningfully — 3px for objects, 2px for controls.",
+      "Do set every piece of small type in Barlow Condensed, uppercase, tracked to at least 0.10em.",
+      "Do let full-bleed color bands carry section rhythm instead of horizontal rules.",
+      "Do brighten a component's text along with its surface on hover, so the object responds as a whole.",
+      "Do fade atmospheric graphics out with a mask so they dissolve into the ground.",
+      "Do give every hover behavior a click or tap equivalent."
+    ],
+    "donts": [
+      "Don't introduce any border-radius, at any size, anywhere (The Square Corner Rule).",
+      "Don't use blurred, ambient, or resting shadows. The only shadow is a hard 4px offset on button hover.",
+      "Don't put Hazard Orange on a call to action — it is the warning signal, not the go signal (The Two Signals Rule).",
+      "Don't use neutral grey or true black. Neutrals are green-biased so the fixed logo belongs.",
+      "Don't frame a full-bleed atmospheric canvas in a hard-edged box — a visible rectangle around ambient artwork was explicitly rejected; mask and fade it instead.",
+      "Don't build simulated product UI — mock dashboards, fake chat transcripts, fake result panels — to illustrate a claim. This was explicitly rejected as cluttered and artificial.",
+      "Don't bookend the page with full-width diagonal stripe bands; that treatment was tried and rejected.",
+      "Don't add intermediate type sizes to soften the jump between display and label. The scale gap is intentional."
+    ]
+  }
+}

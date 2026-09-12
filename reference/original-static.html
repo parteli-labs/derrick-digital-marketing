@@ -1,0 +1,677 @@
+<meta charset="utf-8">
+<title>Derrick Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400..900&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap">
+<style>
+/* WILDCAT — hi-vis industrial poster. Loud, stacked, high-contrast. */
+:root{
+  color-scheme: dark;
+  --ink:#0C0D0A; --ink-2:#14160F;
+  --lime:#C6F24E;            /* safety chartreuse — the shout */
+  --forest:#1B3A28;          /* logo green */
+  --forest-2:#24513A;
+  --orange:#FF5A1F;          /* hazard */
+  --paper:#F2F0E6;
+  --lead:#CFD2BE;            /* hero lead paragraph */
+  --muted:#B9BCA6;           /* body copy inside components */
+  --muted-2:#D6D9C4;         /* ...the same copy on a hovered surface */
+  --sage:#9FC0AC;            /* small labels on a forest ground */
+  --dim:#8D9179;
+  --field:#2E3326;
+  --on-lime:#1A2010;         /* body text on the chartreuse band */
+  --on-lime-2:#2C3520;       /* quieter label on the chartreuse band */
+  --placeholder:#6E7361;     /* input placeholder — never mistakable for a value */
+  --disp:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --body:"Barlow","Helvetica Neue",Arial,sans-serif;
+  --cond:"Barlow Condensed","Arial Narrow",sans-serif;
+  --gut:clamp(18px,4vw,56px);
+}
+*{box-sizing:border-box}
+html{background:var(--ink);scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--body);
+  font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+::selection{background:var(--lime);color:var(--ink)}
+:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+img{max-width:100%}
+
+.wrap{max-width:1280px;margin-inline:auto;padding-inline:var(--gut)}
+
+h1,h2,h3{margin:0;font-family:var(--disp);font-weight:900;text-transform:uppercase;
+  line-height:.86;letter-spacing:.004em;text-wrap:balance}
+.x1{font-size:clamp(2.9rem,9.4vw,7.8rem)}
+.x2{font-size:clamp(2.2rem,5.6vw,4.2rem)}
+.x3{font-size:clamp(1.5rem,2.6vw,2.1rem);line-height:.92}
+p{margin:0}
+.lab{font-family:var(--cond);font-weight:700;text-transform:uppercase;
+  letter-spacing:.18em;font-size:.78rem;color:var(--lime)}
+.lab.dark{color:var(--forest)}
+.lab.dim{color:var(--dim)}
+.big-body{font-size:clamp(1.05rem,1.5vw,1.3rem);line-height:1.5;max-width:46ch;color:var(--lead)}
+.big-body b{color:var(--paper);font-weight:600}
+
+/* ---------- masthead ---------- */
+.mast{position:sticky;top:0;z-index:50;background:var(--ink);border-bottom:3px solid var(--lime)}
+.mast-in{display:flex;align-items:center;gap:20px;height:70px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+.brand svg{width:26px;height:34px;display:block}
+.bw{font-family:var(--disp);font-weight:900;text-transform:uppercase;line-height:.82;font-size:1.2rem}
+.bw i{display:block;font-style:normal}
+.bw i:last-child{color:var(--lime)}
+.mnav{display:flex;gap:22px;margin-left:auto}
+.mnav a{font-family:var(--cond);font-weight:600;text-transform:uppercase;letter-spacing:.14em;
+  font-size:.82rem;color:var(--muted);text-decoration:none}
+.mnav a:hover{color:var(--lime)}
+@media(max-width:900px){.mnav{display:none}}
+
+.btn{display:inline-flex;align-items:center;gap:9px;text-decoration:none;cursor:pointer;
+  font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.13em;
+  font-size:.88rem;padding:13px 22px;border:3px solid var(--lime);background:var(--lime);
+  color:var(--ink);transition:transform .12s, background .18s, color .18s}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--forest-2)}
+.btn.ghost{background:transparent;color:var(--lime)}
+.btn.ghost:hover{background:var(--lime);color:var(--ink)}
+.mast .btn{padding:10px 16px}
+@media(max-width:900px){.mast .btn{margin-left:auto}}
+
+/* ---------- hero ---------- */
+.hero{padding-block:clamp(34px,5vw,64px) 0;position:relative;overflow:hidden}
+.hero-top{display:flex;gap:14px;align-items:center;margin-bottom:22px;flex-wrap:wrap}
+.stamp{display:inline-block;border:2px solid var(--orange);color:var(--orange);
+  font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.16em;
+  font-size:.74rem;padding:5px 11px;transform:rotate(-2.4deg)}
+.x1 .blk{background:var(--lime);color:var(--ink);padding:0 .12em;
+  display:inline-block;transform:skewX(-6deg)}
+.x1 .out{color:transparent;-webkit-text-stroke:2px var(--paper)}
+.hero-btm{padding-block:32px clamp(44px,6vw,72px)}
+.hero .wrap{position:relative;z-index:1;pointer-events:none}
+.hero .wrap a,.hero .wrap .btn{pointer-events:auto}
+
+/* the field — the others, crowding you out. Sits behind, fades at every edge. */
+.seafield{position:absolute;top:0;bottom:0;left:34%;right:-8%;z-index:0;
+  cursor:crosshair;pointer-events:auto;
+  -webkit-mask-image:radial-gradient(ellipse 60% 66% at 52% 50%,
+    #000 30%, rgba(0,0,0,.6) 60%, transparent 84%);
+  mask-image:radial-gradient(ellipse 60% 66% at 52% 50%,
+    #000 30%, rgba(0,0,0,.6) 60%, transparent 84%)}
+.seafield canvas{position:absolute;inset:0;display:block;width:100%;height:100%}
+@media(max-width:900px){
+  .seafield{left:0;right:-10%;opacity:.42}
+}
+.you-lab{position:absolute;left:50%;top:50%;margin:-42px 0 0 -60px;width:120px;text-align:center;
+  font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.24em;
+  font-size:.78rem;color:var(--lime);white-space:nowrap;opacity:0;
+  transition:opacity .45s ease;pointer-events:none}
+.seafield.revealed .you-lab{opacity:1}
+.sea-hint{position:absolute;left:50%;top:50%;margin:34px 0 0 -90px;width:180px;text-align:center;
+  font-family:var(--cond);font-weight:600;text-transform:uppercase;letter-spacing:.18em;
+  font-size:.68rem;color:var(--dim);opacity:.8;transition:opacity .3s ease;pointer-events:none}
+.seafield.revealed .sea-hint{opacity:0}
+@media(max-width:900px){.you-lab,.sea-hint{display:none}}
+.sea-cap{margin-top:26px;font-family:var(--cond);font-weight:600;text-transform:uppercase;
+  letter-spacing:.13em;font-size:.72rem;color:var(--dim);line-height:1.5;max-width:44ch}
+.sea-cap b{color:var(--lime);font-weight:700}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+
+
+/* ---------- shift ---------- */
+.shift{background:var(--lime);color:var(--ink);padding-block:clamp(44px,6vw,80px)}
+.shift h2{color:var(--ink)}
+.shift-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(24px,4vw,60px);align-items:center;margin-top:32px}
+@media(max-width:820px){.shift-grid{grid-template-columns:1fr}}
+.shift p{color:var(--on-lime);font-size:1.02rem;max-width:48ch}
+.shift p b{font-weight:700}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.vsbox{border:3px solid var(--ink);padding:14px}
+.vsbox h4{margin:0 0 12px;font-family:var(--disp);font-weight:900;text-transform:uppercase;
+  font-size:1.5rem;line-height:.9}
+.bars{display:flex;flex-direction:column;gap:6px}
+.bars i{height:9px;background:var(--ink);display:block}
+.bars.faded i{opacity:.85}
+.bars.faded i:nth-child(n+4){opacity:.4}
+.bars.faded i:nth-child(n+7){opacity:.18}
+.bars.three i:nth-child(1){background:var(--orange);height:13px}
+.vsbox .note{margin-top:12px;font-family:var(--cond);font-weight:700;text-transform:uppercase;
+  letter-spacing:.12em;font-size:.74rem;color:var(--on-lime-2)}
+
+/* ---------- services ---------- */
+.svc{padding-block:clamp(48px,7vw,96px)}
+.svc-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;
+  flex-wrap:wrap;margin-bottom:34px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px}
+.card{border:3px solid var(--paper);background:var(--ink-2);padding:22px 20px 24px;
+  display:flex;flex-direction:column;gap:12px;cursor:pointer;
+  transition:background .2s,border-color .2s,transform .15s}
+.card:hover{background:var(--forest);border-color:var(--lime);transform:translateY(-4px)}
+.card .tag{font-family:var(--disp);font-weight:900;font-size:2.6rem;line-height:.8;color:var(--lime)}
+.card h3{font-size:1.45rem}
+.card p{font-size:.92rem;color:var(--muted);line-height:1.5}
+.card:hover p{color:var(--muted-2)}
+.card ul{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.card li{font-family:var(--cond);font-weight:600;text-transform:uppercase;letter-spacing:.1em;
+  font-size:.76rem;color:var(--dim);padding-left:16px;position:relative}
+.card li::before{content:"";position:absolute;left:0;top:.52em;width:8px;height:2px;background:var(--lime)}
+.drawer{margin-top:6px}
+.drawer summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;
+  padding:11px 13px;border:2px solid rgba(198,242,78,.38);
+  font-family:var(--cond);font-weight:700;text-transform:uppercase;
+  letter-spacing:.14em;font-size:.76rem;color:var(--lime);
+  transition:background .18s,color .18s,border-color .18s}
+.drawer summary::-webkit-details-marker{display:none}
+.card:hover .drawer summary{border-color:var(--lime)}
+.drawer summary:hover,.drawer summary:focus-visible{background:var(--lime);color:var(--ink)}
+.drawer .chev{margin-left:auto;position:relative;width:11px;height:11px;flex:0 0 auto}
+.drawer .chev::before,.drawer .chev::after{content:"";position:absolute;background:currentColor;
+  transition:transform .25s cubic-bezier(.2,.7,.3,1)}
+.drawer .chev::before{left:0;right:0;top:5px;height:2px}
+.drawer .chev::after{top:0;bottom:0;left:5px;width:2px}
+.drawer[open] .chev::after{transform:scaleY(0)}
+.drawer-b{padding:15px 2px 4px;overflow:hidden}
+.drawer-b p{font-size:.88rem;color:var(--muted);line-height:1.56}
+.card:hover .drawer-b p{color:var(--muted-2)}
+.card .movement{margin-top:auto;padding-top:15px;border-top:2px solid var(--field);
+  display:flex;justify-content:space-between;align-items:baseline;gap:10px;transition:border-color .2s}
+.card:hover .movement{border-top-color:rgba(198,242,78,.4)}
+.card .movement span{font-family:var(--cond);font-weight:600;text-transform:uppercase;
+  letter-spacing:.14em;font-size:.72rem;color:var(--dim)}
+.card:hover .movement span{color:var(--sage)}
+.card .movement b{font-family:var(--disp);font-weight:900;font-size:1.6rem;line-height:1;
+  color:var(--lime);white-space:nowrap}
+
+/* ---------- numbers ---------- */
+.nums{background:var(--forest);padding-block:clamp(40px,5vw,72px)}
+.nums-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:26px}
+.num b{display:block;font-family:var(--disp);font-weight:900;font-size:clamp(3rem,6vw,5rem);
+  line-height:.82;color:var(--lime)}
+.num span{display:block;margin-top:10px;font-family:var(--cond);font-weight:600;
+  text-transform:uppercase;letter-spacing:.14em;font-size:.8rem;color:var(--sage)}
+
+/* ---------- contact ---------- */
+.cta{padding-block:clamp(52px,7vw,100px)}
+.cta .x2{margin:14px 0 18px}
+.formwrap{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);
+  gap:clamp(26px,4vw,64px);align-items:start;margin-top:36px}
+@media(max-width:940px){.formwrap{grid-template-columns:1fr}}
+.gets{list-style:none;margin:24px 0 0;padding:0;display:flex;flex-direction:column;gap:0}
+.gets li{display:flex;gap:13px;align-items:flex-start;padding:14px 0;border-top:2px solid var(--field)}
+.gets li:last-child{border-bottom:2px solid var(--field)}
+.gets li b{font-family:var(--disp);font-weight:900;font-size:1.15rem;line-height:1.1;
+  color:var(--lime);flex:0 0 auto;min-width:22px}
+.gets li p{font-size:.92rem;color:var(--muted);line-height:1.5}
+.gets li p em{font-style:normal;color:var(--paper);font-weight:600}
+
+.ticket{border:3px solid var(--paper);background:var(--ink-2)}
+.ticket-h{background:var(--paper);color:var(--ink);padding:10px 14px;display:flex;
+  justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}
+.ticket-h span{font-family:var(--cond);font-weight:700;text-transform:uppercase;
+  letter-spacing:.14em;font-size:.76rem}
+form.fields{padding:18px 16px 20px;display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.fld{display:flex;flex-direction:column;gap:6px}
+.fld.full{grid-column:1/-1}
+@media(max-width:560px){form.fields{grid-template-columns:1fr}.fld{grid-column:1/-1}}
+.fld label{font-family:var(--cond);font-weight:700;text-transform:uppercase;
+  letter-spacing:.15em;font-size:.72rem;color:var(--lime)}
+.fld input,.fld select,.fld textarea{font-family:var(--body);font-size:.94rem;color:var(--paper);
+  background:var(--ink);border:2px solid var(--field);padding:10px 11px;width:100%;
+  transition:border-color .18s}
+.fld textarea{resize:vertical;min-height:84px;line-height:1.5}
+.fld select{appearance:none;padding-right:26px;background-repeat:no-repeat;
+  background-position:right 9px center;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7'%3E%3Cpath d='M0 0h10L5 7z' fill='%23C6F24E'/%3E%3C/svg%3E")}
+.fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:var(--lime)}
+.fld input::placeholder,.fld textarea::placeholder{color:var(--placeholder)}
+.ticket-f{grid-column:1/-1;display:flex;align-items:center;gap:15px;flex-wrap:wrap;
+  padding-top:8px;border-top:2px solid var(--field)}
+.ticket-f .note{font-family:var(--cond);font-weight:600;text-transform:uppercase;
+  letter-spacing:.12em;font-size:.72rem;color:var(--dim);max-width:32ch}
+.sent{margin:0 16px 18px;background:var(--lime);color:var(--ink);padding:13px 14px;
+  font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+  font-size:.86rem;display:none}
+.sent.on{display:block}
+footer{border-top:3px solid var(--lime);padding-block:26px}
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+.foot span{font-family:var(--cond);font-weight:600;text-transform:uppercase;
+  letter-spacing:.14em;font-size:.76rem;color:var(--dim)}
+</style>
+
+
+<header class="mast">
+  <div class="wrap mast-in">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 40 52" fill="none" style="stroke:var(--lime)" stroke-width="2.2" aria-hidden="true">
+        <path d="M6 50 L15.5 4 M34 50 L24.5 4"/><path d="M13.4 15H26.6M11.2 26H28.8M9 37H31"/>
+        <path d="M13.4 15 L28.8 26 M26.6 15 L11.2 26 M11.2 26 L31 37 M28.8 26 L9 37 M9 37 L34 50 M31 37 L6 50" stroke="rgba(198,242,78,.4)" stroke-width="1.5"/>
+      </svg>
+      <span class="bw"><i>Derrick</i><i>Digital</i></span>
+    </a>
+    <nav class="mnav"><a href="#shift">The Shift</a><a href="#svc">What We Do</a><a href="#cta">Contact</a></nav>
+    <a class="btn" href="#cta">Request Audit</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="seafield" id="sea-wrap" aria-hidden="true">
+    <canvas id="sea"></canvas>
+    <span class="you-lab">You</span>
+    <span class="sea-hint">Hover to clear</span>
+  </div>
+  <div class="wrap">
+    <div class="hero-top">
+      <span class="stamp">Alberta · WCSB</span>
+      <span class="lab">GEO · SEO · Brand for the Oil Patch</span>
+    </div>
+    <h1 class="x1">Three names<br>come back.<br><span class="blk">Be one</span> <span class="out">of them.</span></h1>
+
+    <div class="hero-btm">
+      <p class="big-body">Superintendents stopped scrolling ten blue links. They ask, they get
+      a short list, and they call it. <b>We put Alberta energy companies on that list.</b></p>
+      <div class="hero-cta">
+        <a class="btn" href="#cta">Run my audit →</a>
+        <a class="btn ghost" href="#shift">What changed</a>
+      </div>
+      <p class="sea-cap">Roughly <b>400</b> service companies working the same basins.
+      The answer names <b>three</b>.</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="shift" id="shift">
+  <div class="wrap">
+    <span class="lab dark">The Shift</span>
+    <h2 class="x2" style="margin-top:12px">The results<br>got shorter.</h2>
+    <div class="shift-grid">
+      <div>
+        <p style="margin-bottom:16px">A page-one ranking used to mean ten chances to get noticed.
+        It now means being one of the sources a model reads before it writes a three-name
+        answer nobody scrolls past.</p>
+        <p><b>Most oilfield companies have never checked what that answer says about them.</b>
+        The ones who move first take the slot and hold it — these systems are conservative.
+        Once you're the cited authority, you stay it.</p>
+      </div>
+      <div class="vs">
+        <div class="vsbox">
+          <h4>2019</h4>
+          <div class="bars faded"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <p class="note">Ten links. Ten chances.</p>
+        </div>
+        <div class="vsbox">
+          <h4>Now</h4>
+          <div class="bars three"><i></i><i></i><i></i></div>
+          <p class="note">Three names. One shot.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="svc" id="svc">
+  <div class="wrap">
+    <div class="svc-head">
+      <div>
+        <span class="lab">What We Do</span>
+        <h2 class="x2" style="margin-top:12px">Three service lines.<br>No retainer theatre.</h2>
+      </div>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="tag">GEO</div>
+        <h3>Generative Engine Optimization</h3>
+        <p>We baseline what five assistants say about you, rebuild the evidence trail underneath
+        it, and keep checking — because it drifts.</p>
+        <ul><li>312-prompt baseline</li><li>Entity + schema build</li><li>Citation program</li><li>Monthly re-run</li></ul>
+        <details class="drawer">
+          <summary>What is GEO?<span class="chev"></span></summary>
+          <div class="drawer-b"><p>When someone asks ChatGPT, Claude, Gemini or Google's AI “who does coil tubing in the Montney,” the reply names a handful of companies and stops. Generative Engine Optimization is the work of making yours one of those names — structuring the evidence those systems read so they can name you with confidence instead of guessing.</p></div>
+        </details>
+        <div class="movement"><span>First movement</span><b>45–90 days</b></div>
+      </div>
+      <div class="card">
+        <div class="tag">SEO</div>
+        <h3>Search Engine Optimization</h3>
+        <p>Nobody is retiring search. Architecture, service-area and play pages, and the technical
+        work that gets you found by people ready to buy.</p>
+        <ul><li>Technical audit</li><li>IA rebuild</li><li>Play + location pages</li><li>Search Console</li></ul>
+        <details class="drawer">
+          <summary>What is SEO?<span class="chev"></span></summary>
+          <div class="drawer-b"><p>The older discipline: getting your site to rank in the list of blue links on Google and Bing. It still starts most qualified enquiries in this industry and still pays for itself — it is just no longer the whole picture, because a growing share of buyers never reach the list.</p></div>
+        </details>
+        <div class="movement"><span>First movement</span><b>60–120 days</b></div>
+      </div>
+      <div class="card">
+        <div class="tag">BRD</div>
+        <h3>Brand &amp; Technical Content</h3>
+        <p>Capability sheets and case work written by people who know a completion crew from a
+        workover rig. Plus the identity that makes it look serious.</p>
+        <ul><li>Capability statements</li><li>Case studies</li><li>Site copy</li><li>Identity system</li></ul>
+        <details class="drawer">
+          <summary>What counts as brand work?<span class="chev"></span></summary>
+          <div class="drawer-b"><p>Everything a buyer reads once they have found you: capability statements, case work, spec sheets, site copy, and the visual identity holding it together. It is what moves you from “I have heard of them” to “put them on the bid list.”</p></div>
+        </details>
+        <div class="movement"><span>First movement</span><b>3–6 weeks</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="nums">
+  <div class="wrap nums-grid">
+    <div class="num"><b>312</b><span>Buyer prompts per audit</span></div>
+    <div class="num"><b>5</b><span>Engines monitored</span></div>
+    <div class="num"><b>21d</b><span>Baseline to first move</span></div>
+    <div class="num"><b>0</b><span>Annual contracts</span></div>
+  </div>
+</section>
+
+<section class="cta" id="cta">
+  <div class="wrap">
+    <span class="lab">Contact</span>
+    <h2 class="x2">Tell us what<br>you're trying to fix.</h2>
+
+    <div class="formwrap">
+      <div>
+        <p class="big-body">Whether you want the full audit, a second opinion on work someone
+        else is doing, or you just aren't sure what you're looking at — send it over.</p>
+        <ul class="gets">
+          <li><b>01</b><p><em>A reply from a person</em>, inside one business day. Not a scheduling link.</p></li>
+          <li><b>02</b><p><em>No list, no drip sequence.</em> We don't add you to anything and we don't follow up twice.</p></li>
+          <li><b>03</b><p><em>A straight answer.</em> If the fix is three afternoons of work you don't need us for, we'll say so — and if we're not the right shop, we'll point you at who is.</p></li>
+        </ul>
+      </div>
+
+      <div class="ticket">
+        <div class="ticket-h"><span>Send us a note</span><span>Reply in 1 business day</span></div>
+        <form class="fields" id="auditForm" novalidate>
+          <div class="fld">
+            <label for="f-name">Name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" placeholder="First and last" required>
+          </div>
+          <div class="fld">
+            <label for="f-co">Company</label>
+            <input id="f-co" name="company" type="text" autocomplete="organization" placeholder="Operating name" required>
+          </div>
+          <div class="fld">
+            <label for="f-topic">What's this about?</label>
+            <select id="f-topic" name="topic">
+              <option>A visibility audit</option>
+              <option>Generative Engine Optimization</option>
+              <option>Search Engine Optimization</option>
+              <option>Brand &amp; technical content</option>
+              <option>A second opinion on current work</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div class="fld">
+            <label for="f-area">Operating area</label>
+            <input id="f-area" name="area" type="text" placeholder="e.g. Montney, Grande Prairie">
+          </div>
+          <div class="fld">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" placeholder="name@company.ca" required>
+          </div>
+          <div class="fld">
+            <label for="f-phone">Phone</label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="(780) 555-0142">
+          </div>
+          <div class="fld full">
+            <label for="f-note">Message</label>
+            <textarea id="f-note" name="note" placeholder="What you're trying to fix, who you're losing bids to, what you've already tried."></textarea>
+          </div>
+          <div class="ticket-f">
+            <button class="btn" type="submit">Send message →</button>
+            <span class="note">Opens in your email app so you keep a copy.</span>
+          </div>
+        </form>
+        <div class="sent" id="sent">Your email app should be open with the message ready to send.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 Derrick Digital — Alberta, Canada</span>
+    <span>hello@derrickdigital.ca</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  // Change this to the real inbox before launch.
+  var TO = "hello@derrickdigital.ca";
+
+  var form = document.getElementById("auditForm");
+  var sent = document.getElementById("sent");
+  if (!form) return;
+
+  function val(id){
+    var el = document.getElementById(id);
+    return el ? String(el.value || "").trim() : "";
+  }
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    if (!form.checkValidity()){ form.reportValidity(); return; }
+
+    var company = val("f-co");
+    var topic   = val("f-topic");
+    var subject = "Website enquiry" + (topic ? " — " + topic : "") + (company ? " — " + company : "");
+    var lines = [
+      "Name: "          + val("f-name"),
+      "Company: "       + company,
+      "Enquiry: "       + topic,
+      "Operating area: "+ (val("f-area") || "—"),
+      "Email: "         + val("f-email"),
+      "Phone: "         + (val("f-phone") || "—"),
+      "",
+      "Message:",
+      val("f-note") || "—"
+    ];
+
+    window.location.href = "mailto:" + TO +
+      "?subject=" + encodeURIComponent(subject) +
+      "&body="    + encodeURIComponent(lines.join("\r\n"));
+
+    sent.classList.add("on");
+  });
+})();
+</script>
+
+<script>
+/* The field: a crowd of others piled on top of you. Hover clears them. */
+(function(){
+  "use strict";
+  var wrap = document.getElementById("sea-wrap");
+  var cv   = document.getElementById("sea");
+  if (!wrap || !cv || !cv.getContext) return;
+
+  var ctx = cv.getContext("2d");
+  var others = [], W = 0, H = 0, raf = null, running = false;
+  var reveal = 0, target = 0, pinned = false;
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var YOU_W = 54, YOU_H = 12;
+
+  function build(){
+    var r = wrap.getBoundingClientRect();
+    W = r.width; H = r.height;
+    if (!W || !H) return false;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cv.width  = Math.round(W * dpr);
+    cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    others = [];
+    var cx = W / 2, cy = H / 2;
+    var maxR = Math.min(W, H) * 0.52;
+    var N = Math.round(Math.max(52, Math.min(110, (W * H) / 1500)));
+
+    for (var i = 0; i < N; i++){
+      var ang = Math.random() * Math.PI * 2;
+      // bias toward the centre so the crowd genuinely piles on top of you
+      var rad = Math.pow(Math.random(), 1.55) * maxR;
+      var hx = cx + Math.cos(ang) * rad * 1.18;
+      var hy = cy + Math.sin(ang) * rad * 0.9;
+      // where they scatter to when cleared — outward, past the frame
+      var push = 1.9 + Math.random() * 1.3;
+      others.push({
+        hx: hx, hy: hy,
+        dx: Math.cos(ang) * (rad * push + W * 0.42) - Math.cos(ang) * rad * 1.18,
+        dy: Math.sin(ang) * (rad * push + H * 0.42) - Math.sin(ang) * rad * 0.9,
+        w: 12 + Math.random() * 52,
+        h: 4 + Math.random() * 9,
+        a: 0.3 + Math.random() * 0.55,
+        ph: Math.random() * Math.PI * 2,
+        sp: 0.55 + Math.random() * 1.0,
+        dr: 2 + Math.random() * 4
+      });
+    }
+    return true;
+  }
+
+  function draw(t){
+    reveal += (target - reveal) * 0.075;
+    if (Math.abs(target - reveal) < 0.002) reveal = target;
+
+    ctx.clearRect(0, 0, W, H);
+    var cx = W / 2, cy = H / 2;
+
+    // you — underneath, only visible once the crowd moves off
+    ctx.save();
+    ctx.shadowColor = "rgba(198,242,78,.75)";
+    ctx.shadowBlur = 10 + reveal * 22;
+    ctx.fillStyle = "#C6F24E";
+    ctx.fillRect(cx - YOU_W / 2, cy - YOU_H / 2, YOU_W, YOU_H);
+    ctx.restore();
+
+    // the others — drawn over the top
+    for (var k = 0; k < others.length; k++){
+      var o = others[k];
+      var bob = reduced ? 0 : Math.sin(t * 0.00045 * o.sp + o.ph) * o.dr;
+      var x = o.hx + o.dx * reveal;
+      var y = o.hy + o.dy * reveal + bob;
+      ctx.fillStyle = "rgba(141,145,121," + (o.a * (1 - reveal * 0.55)).toFixed(3) + ")";
+      ctx.fillRect(x, y, o.w, o.h);
+    }
+
+    var settled = (reveal === target);
+    if (reduced && settled){ running = false; raf = null; return; }
+    raf = window.requestAnimationFrame(draw);
+  }
+
+  function stop(){
+    if (raf){ window.cancelAnimationFrame(raf); raf = null; }
+    running = false;
+  }
+  function start(){
+    stop();
+    if (!build()) return;
+    running = true;
+    raf = window.requestAnimationFrame(draw);
+  }
+  function kick(){ if (!running) start(); }
+
+  function setTarget(v){
+    target = v;
+    wrap.classList.toggle("revealed", v > 0.5);
+    kick();
+  }
+
+  wrap.addEventListener("pointerenter", function(e){
+    if (e.pointerType === "touch") return;
+    if (!pinned) setTarget(1);
+  });
+  wrap.addEventListener("pointerleave", function(e){
+    if (e.pointerType === "touch") return;
+    if (!pinned) setTarget(0);
+  });
+  // touch and click: pin it open, tap again to close
+  wrap.addEventListener("click", function(){
+    pinned = !pinned;
+    setTarget(pinned ? 1 : 0);
+  });
+
+  var t0 = null;
+  window.addEventListener("resize", function(){
+    window.clearTimeout(t0);
+    t0 = window.setTimeout(start, 180);
+  });
+
+  if ("IntersectionObserver" in window){
+    new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if (en.isIntersecting) kick(); else stop(); });
+    }, { threshold: 0.05 }).observe(wrap);
+  }
+  document.addEventListener("visibilitychange", function(){
+    if (document.hidden) stop(); else kick();
+  });
+
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(start);
+  start();
+})();
+
+/* Drawers: <details> keeps the semantics, JS supplies the open/close animation.
+   The whole tile is the control, since the whole tile already looks interactive. */
+(function(){
+  "use strict";
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var EASE_IN  = "cubic-bezier(.2,.7,.3,1)";
+  var EASE_OUT = "cubic-bezier(.4,0,.7,.2)";
+
+  Array.prototype.forEach.call(document.querySelectorAll(".card"), function(card){
+    var d = card.querySelector("details.drawer");
+    if (!d) return;
+    var body = d.querySelector(".drawer-b");
+    var sum  = d.querySelector("summary");
+    if (!body || !sum) return;
+
+    var anim = null;
+    var canAnimate = !reduced && typeof body.animate === "function";
+
+    function cleanup(){
+      anim = null;
+      body.style.height = "";
+      body.style.opacity = "";
+    }
+
+    function open(){
+      if (anim){ anim.cancel(); anim = null; }
+      d.open = true;
+      if (!canAnimate) return;
+      var h = body.offsetHeight;           // measured with the drawer open
+      anim = body.animate(
+        [{ height: "0px", opacity: 0 }, { height: h + "px", opacity: 1 }],
+        { duration: 260, easing: EASE_IN }
+      );
+      anim.onfinish = cleanup;
+      anim.oncancel = cleanup;
+    }
+
+    function close(){
+      if (anim){ anim.cancel(); anim = null; }
+      if (!canAnimate){ d.open = false; return; }
+      var h = body.offsetHeight;
+      anim = body.animate(
+        [{ height: h + "px", opacity: 1 }, { height: "0px", opacity: 0 }],
+        { duration: 210, easing: EASE_OUT }
+      );
+      anim.onfinish = function(){ d.open = false; cleanup(); };
+      anim.oncancel = cleanup;
+    }
+
+    function toggle(){ d.open ? close() : open(); }
+
+    // take over the native toggle so the close can finish animating first
+    sum.addEventListener("click", function(e){ e.preventDefault(); toggle(); });
+
+    card.addEventListener("click", function(e){
+      if (e.target.closest("summary") || e.target.closest("a")) return;
+      toggle();
+    });
+  });
+})();
+</script>
+

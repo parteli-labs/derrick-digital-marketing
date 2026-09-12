@@ -1,0 +1,6 @@
+{
+  "files": ["index.html"],
+  "insertBefore": "<!-- impeccable-live-anchor -->",
+  "commentSyntax": "html",
+  "cspChecked": true
+}
