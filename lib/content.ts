@@ -9,6 +9,50 @@
 
 import { awaiting, confirmed, type Evidence } from "./evidence";
 
+/** Used when the deploy host names no origin of its own. */
+const FALLBACK_ORIGIN = "https://derrickdigital.ca";
+
+/**
+ * Hosts supply this variable in shapes `new URL()` rejects, and the failure
+ * surfaces as a bare `TypeError: Invalid URL` while Next collects page data —
+ * a long way from the cause, and only on the deploy, because a local `.env`
+ * has it right.
+ *
+ * Two of those shapes are worth absorbing rather than failing on:
+ *
+ * - **Empty.** `??` only catches null and undefined, so a variable that exists
+ *   and holds "" passes straight through. A dashboard field someone cleared
+ *   reads as unset and is treated as unset.
+ * - **No scheme.** Vercel's own `VERCEL_URL` is `project.vercel.app`, so
+ *   pointing this at it — or typing the bare domain — is the obvious mistake.
+ *   `https://` is assumed.
+ *
+ * Anything still unparseable throws with the variable named, because this site
+ * sells search visibility: publishing a canonical, a sitemap and an og:url that
+ * silently point at the wrong origin is worse than a build that stops.
+ */
+function resolveSiteUrl(raw: string | undefined): string {
+  const value = raw?.trim();
+  if (!value) return FALLBACK_ORIGIN;
+
+  const candidate = /^https?:\/\//i.test(value) ? value : `https://${value}`;
+  try {
+    const url = new URL(candidate);
+    // A mistyped scheme still parses once `https://` is bolted on the front —
+    // "ht!tp://host" yields the hostname "ht!tp" — so the host is checked
+    // rather than trusted to the parser.
+    if (!/^[a-z0-9.-]+$/i.test(url.hostname)) throw new Error("implausible host");
+    // `origin` normalises away a trailing slash, which robots.ts would
+    // otherwise double into `https://host//sitemap.xml`.
+    return url.origin;
+  } catch {
+    throw new Error(
+      `NEXT_PUBLIC_SITE_URL is not a usable origin: ${JSON.stringify(raw)}. ` +
+        `Expected something like ${FALLBACK_ORIGIN} — scheme optional, path ignored.`,
+    );
+  }
+}
+
 export const site = {
   name: "Derrick Digital",
   tagline: "GEO, SEO and brand for Alberta energy companies.",
@@ -24,7 +68,7 @@ export const site = {
   ),
   region: "Alberta, Canada",
   /** Domain is not confirmed as registered. Override per environment. */
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://derrickdigital.ca",
+  url: resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL),
 } as const;
 
 /** Masthead links. Contact is deliberately absent: the CTA beside them is it. */

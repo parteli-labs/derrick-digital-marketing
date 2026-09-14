@@ -18,7 +18,7 @@ const base =
 
 const variants = {
   // Ink on orange is 6.3:1; paper on orange is 2.7:1 and never passed.
-  primary: "bg-orange text-ink border-orange hover:shadow-[4px_4px_0_var(--color-orange-2)]",
+  primary: "bg-lime text-ink border-lime hover:shadow-[4px_4px_0_var(--color-forest-2)]",
   ghost:
     "bg-transparent text-lime border-lime hover:bg-lime hover:text-ink " +
     "hover:shadow-[4px_4px_0_var(--color-forest-2)]",
