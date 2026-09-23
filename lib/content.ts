@@ -7,7 +7,7 @@
  * `confirmed(...)` with the real value.
  */
 
-import { awaiting, confirmed, type Evidence } from "./evidence";
+import { confirmed, type Evidence } from "./evidence";
 
 /** Used when the deploy host names no origin of its own. */
 const FALLBACK_ORIGIN = "https://derrickdigital.ca";
@@ -56,16 +56,8 @@ function resolveSiteUrl(raw: string | undefined): string {
 export const site = {
   name: "Derrick Digital",
   tagline: "GEO, SEO and brand for Alberta energy companies.",
-  email: awaiting(
-    "hello@derrickdigital.ca",
-    "Enquiry inbox",
-    "The real address enquiries should reach. Until this lands the site lists no email and the form's mail-client fallback stays off.",
-  ),
-  phone: awaiting(
-    { display: "(780) 555-0142", href: "+17805550142" },
-    "Phone number",
-    "A real number, or a decision that the site lists none. 555-01xx is the reserved fictional range and reads as fake.",
-  ),
+  email: confirmed("hello@derrickdigital.ca"),
+  phone: confirmed({ display: "+1 (587) 377-4323", href: "+15873774323" }),
   region: "Alberta, Canada",
   /** Domain is not confirmed as registered. Override per environment. */
   url: resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL),
@@ -81,8 +73,29 @@ export const nav = [
 export type Segment = string | { em: string };
 
 export const hero = {
-  body: "No one scrolls through dozens of blue links anymore. They do a search and click the first link. They ask an agent and get a recommendation.",
-  bodyStrong: "We put Alberta energy companies at the top of those results.",
+  body: "When buyers ask Google or AI who to call,",
+  bodyStrong: "we make sure the answer is you.",
+} as const;
+
+type Photo = { src: string };
+
+const stock = (id: string) => `https://images.unsplash.com/photo-${id}?auto=format&q=75&w=2400`;
+
+/**
+ * Full-bleed photography. All three are free-licence stock standing in for the
+ * client's own field photography, and none is confirmed to be Alberta.
+ *
+ * Whatever replaces them must show no operator or contractor name: a page
+ * selling credibility to this industry cannot open on someone else's equipment.
+ * The hero is served from /public (Pixabay, "eyeonicimages"); the others from
+ * the stock libraries allowed in next.config.ts.
+ */
+export const photos = {
+  hero: { src: "/photos/hero-rig-dusk.jpg" } satisfies Photo,
+  vista: {
+    src: "https://images.pexels.com/photos/9407367/pexels-photo-9407367.jpeg?auto=compress&cs=tinysrgb&w=2400",
+  } satisfies Photo,
+  contact: { src: stock("1778124691381-ee0ef169500c") } satisfies Photo,
 } as const;
 
 export const shift = {
@@ -150,19 +163,10 @@ export const services: Service[] = [
 export type Stat = { figure: Evidence<string>; label: string };
 
 export const stats: Stat[] = [
-  {
-    figure: confirmed("312"),
-    label: "Buyer prompts per audit",
-  },
-  {
-    figure: confirmed("5"),
-    label: "Engines monitored",
-  },
-  { figure: confirmed("21d"), label: "Baseline to first move" },
-  {
-    figure: confirmed("0"),
-    label: "Annual contracts",
-  },
+  { figure: confirmed("312"), label: "Buyer prompts tested per audit" },
+  { figure: confirmed("5"), label: "AI engines tracked monthly" },
+  { figure: confirmed("3"), label: "Disciplines, one team" },
+  { figure: confirmed("21"), label: "Days from audit to first fix" },
 ];
 
 /**
@@ -171,39 +175,33 @@ export const stats: Stat[] = [
  */
 export const STATS_MINIMUM = 2;
 
-const replyPromise = awaiting(
-  "1 business day",
-  "Reply-time promise",
-  "The response time the client will actually commit to. Until then the site promises a person, not a deadline.",
-);
+const replyPromise = confirmed("1 business day");
 
 export const contact = {
-  heading: ["We'd love to hear from", "you."],
+  heading: ["Put your name", "in the answer."],
   body:
-    "Whether you want the full audit, a second opinion on work someone else is doing, or you just aren't sure what you're looking at. Send it over!",
+    "A visibility audit, a second opinion on work already underway, or a clear view of where you stand. Every enquiry is answered personally.",
   replyPromise,
   /** Form header badge. Omitted when the promise is unverified. */
-  replyBadge: (window: string) => `Reply in ${window}`,
+  replyBadge: (window: string) => `Reply within ${window}`,
   promises: [
     {
       n: "01",
-      strong: "A reply from a human",
-      sourced: (window: string) => `, in the next ${window}.`,
-      plain: () => ", not an auto-reply.",
+      strong: "A personal reply",
+      sourced: (window: string) => `, within ${window}.`,
+      plain: () => ", never an automated one.",
     },
     {
       n: "02",
-      strong: "Not a mailing list.",
-      sourced: () => " We don't add you to anything and we won't send you a newsletter. Just a quick follow up!",
-      plain: () => " We don't add you to anything and we won't send you a newsletter. Just a quick follow up!",
+      strong: "Discretion.",
+      sourced: () => " Your enquiry stays with us. No lists, no newsletters.",
+      plain: () => " Your enquiry stays with us. No lists, no newsletters.",
     },
     {
       n: "03",
-      strong: "A straight answer.",
-      sourced: () =>
-        " If the fix is three afternoons of work you don't need us for, we'll say so! If we're not the right fit, we'll help point you towards someone who is.",
-      plain: () =>
-        " If the fix is three afternoons of work you don't need us for, we'll say so! If we're not the right fit, we'll help point you towards someone who is.",
+      strong: "A candid assessment.",
+      sourced: () => " If you don't need us, we'll say so. If someone else is better placed, we'll tell you who.",
+      plain: () => " If you don't need us, we'll say so. If someone else is better placed, we'll tell you who.",
     },
   ],
   topics: [
@@ -214,12 +212,20 @@ export const contact = {
     "A second opinion on current work",
     "Not sure yet",
   ],
+  /** Bands rather than a figure: one click, comparable answers, nothing to look up. */
+  revenueBands: [
+    "Under $1M",
+    "$1M–$5M",
+    "$5M–$20M",
+    "$20M–$100M",
+    "Over $100M",
+    "Prefer not to say",
+  ],
   confirmation: {
-    sourced: (window: string) =>
-      `Thanks! We'll get back to you inside ${window}, from a real person.`,
-    plain: () => "Thanks! A real person will get back to you, not a scheduling link.",
+    sourced: (window: string) => `Received. You'll hear from us personally within ${window}.`,
+    plain: () => "Received. You'll hear from us personally.",
     mailto:
-      "Your message is loaded in your email app, hit send and it reaches the same inbox. If nothing opened, this device has no mail app set up.",
+      "Your enquiry is ready in your email app. Send it from there and it reaches the same inbox. If nothing opened, this device has no mail client configured.",
   },
   /**
    * Each error names what failed and, where we can know it, why. The recovery
@@ -227,10 +233,10 @@ export const contact = {
    * same thing twice in the same box.
    */
   errors: {
-    invalid: "We need a name, a company and an email address we can reply to.",
-    offline: "That didn't send. Your device appears to be offline.",
-    server: "That didn't send. Something went wrong between here and us.",
-    unreachable: "That didn't send. Try again in a moment.",
+    invalid: "A name, a company and a reply address are required.",
+    offline: "Your enquiry was not sent. This device appears to be offline.",
+    server: "Your enquiry was not sent. The fault is on our side.",
+    unreachable: "Your enquiry was not sent. Please try again shortly.",
   },
 } as const;
 

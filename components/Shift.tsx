@@ -1,56 +1,69 @@
+import type { CSSProperties } from "react";
+import { CountUp, Reveal } from "./motion";
 import { shift } from "@/lib/content";
 
-function Bars({ variant }: { variant: "then" | "now" }) {
-  if (variant === "now") {
-    return (
-      <div className="flex flex-col gap-1.5">
-        <i className="block h-[13px] bg-orange" />
-        <i className="block h-[9px] bg-ink" />
-        <i className="block h-[9px] bg-ink" />
-      </div>
-    );
-  }
-  const opacity = [0.85, 0.85, 0.85, 0.4, 0.4, 0.4, 0.18, 0.18, 0.18, 0.18];
+/** Ten results of slightly uneven length, fading in three tiers down the page. */
+const THEN = [1, 0.92, 0.96, 0.88, 0.94, 0.9, 0.86, 0.93, 0.89, 0.95];
+const NOW = [1, 0.9, 0.94];
+const tier = (i: number) => (i < 3 ? 0.7 : i < 6 ? 0.42 : 0.25);
+
+/** Each bar draws across in turn when its Reveal lands — see `.u-bar`. */
+function Bars({ widths, now = false }: { widths: number[]; now?: boolean }) {
   return (
-    <div className="flex flex-col gap-1.5">
-      {opacity.map((o, i) => (
-        <i key={i} className="block h-[9px] bg-ink" style={{ opacity: o }} />
+    <div className="mt-4 grid gap-[7px]">
+      {widths.map((w, i) => (
+        <i
+          key={i}
+          style={{ "--w": w, "--bar-delay": `${0.3 + i * 0.05}s`, opacity: now ? 1 : tier(i) } as CSSProperties}
+          className={`block u-bar ${now && i === 0 ? "h-[3px] bg-gold" : "h-0.5 bg-paper"}`}
+        />
       ))}
     </div>
   );
 }
 
 export function Shift() {
-  return (
-    <section id="shift" data-ground="lime" className="bg-lime text-ink py-[clamp(44px,6vw,80px)]">
-      <div className="mx-auto max-w-[1280px] px-gut">
-        <h2 className="text-headline text-ink">
-          {shift.heading[0]}
-          <br />
-          {shift.heading[1]}
-        </h2>
+  const columns = [
+    { ...shift.then, count: "10", widths: THEN, now: false },
+    { ...shift.now, count: "3", widths: NOW, now: true },
+  ];
 
-        <div className="mt-8 grid items-center gap-[clamp(24px,4vw,60px)] lg:grid-cols-2">
-          <div className="flex flex-col gap-4">
+  return (
+    <section id="shift" data-ground="forest" className="bg-forest py-section">
+      <div className="mx-auto max-w-[1320px] px-gut">
+        <Reveal>
+          <h2 className="text-headline">
+            {shift.heading[0]} {shift.heading[1]}
+          </h2>
+        </Reveal>
+
+        <div className="mt-[clamp(40px,5vw,64px)] grid items-end gap-[clamp(32px,6vw,96px)] lg:grid-cols-[5fr_4fr]">
+          <Reveal delay={0.1} className="flex flex-col gap-[18px]">
             {shift.paragraphs.map((p, i) => (
-              <p key={i} className="max-w-[48ch] text-lead text-on-lime">
+              <p key={i} className="max-w-[46ch] text-lead text-mist">
                 {p}
               </p>
             ))}
-          </div>
+          </Reveal>
 
-          <div className="grid grid-cols-2 gap-3.5">
-            <div className="border-[3px] border-ink p-3.5">
-              <h3 className="mb-3 text-title text-ink">{shift.then.label}</h3>
-              <Bars variant="then" />
-              <p className="mt-3 u-label-sm text-on-lime-2">{shift.then.note}</p>
-            </div>
-            <div className="border-[3px] border-ink p-3.5">
-              <h3 className="mb-3 text-title text-ink">{shift.now.label}</h3>
-              <Bars variant="now" />
-              <p className="mt-3 u-label-sm text-on-lime-2">{shift.now.note}</p>
-            </div>
-          </div>
+          <Reveal delay={0.2} className="grid grid-cols-2 gap-7">
+            {columns.map((col) => (
+              <div key={col.label}>
+                <h3 className="flex items-baseline justify-between border-b border-paper/35 pb-2.5 text-body-md font-light">
+                  {col.label}
+                  <b
+                    className={`text-figure-sm tabular-nums ${
+                      col.now ? "font-light text-gold" : "font-extralight"
+                    }`}
+                  >
+                    <CountUp value={col.count} delay={0.2} />
+                  </b>
+                </h3>
+                <Bars widths={col.widths} now={col.now} />
+                <span className="mt-4 block u-label text-sage">{col.note}</span>
+              </div>
+            ))}
+          </Reveal>
         </div>
       </div>
     </section>

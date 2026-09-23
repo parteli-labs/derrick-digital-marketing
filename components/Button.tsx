@@ -1,36 +1,43 @@
 import type { ComponentPropsWithoutRef } from "react";
 
 /**
- * The Two Signals Rule: Hazard Orange is the go signal and carries every call to
- * action; chartreuse is the accent that labels and marks. Hover lifts into a
- * hard 4px offset — the system's only shadow.
+ * Gold fill is the one call to action; the text variant is the quieter route
+ * beside it. The arrow, when a label carries one, nudges right on hover — the
+ * only movement a button makes. There are no shadows and no lift.
  *
- * Border colour and the hover offset live in the variants rather than the base.
- * Two utilities for the same property in one class string resolve by stylesheet
- * order, not by the order they were written, so a variant cannot reliably
- * override a base it shares a property with.
+ * Colours live in the variants rather than the base. Two utilities for the same
+ * property in one class string resolve by stylesheet order, not by the order
+ * they were written, so a variant cannot reliably override a base it shares a
+ * property with.
  */
 const base =
-  "inline-flex items-center gap-2.5 cursor-pointer font-cond font-bold uppercase tracking-[0.13em] " +
-  "text-label border-[3px] transition-[transform,background-color,color,box-shadow] " +
-  "duration-150 ease-out hover:-translate-x-0.5 hover:-translate-y-0.5 " +
-  "active:translate-x-0 active:translate-y-0 active:shadow-none";
+  "group/btn inline-flex items-center gap-3.5 whitespace-nowrap cursor-pointer text-body-sm font-medium " +
+  "tracking-[0.04em] transition-colors duration-300";
 
 const variants = {
-  // Ink on orange is 6.3:1; paper on orange is 2.7:1 and never passed.
-  primary: "bg-lime text-ink border-lime hover:shadow-[4px_4px_0_var(--color-forest-2)]",
-  ghost:
-    "bg-transparent text-lime border-lime hover:bg-lime hover:text-ink " +
-    "hover:shadow-[4px_4px_0_var(--color-forest-2)]",
+  primary: "bg-gold text-ink hover:bg-paper",
+  text: "bg-transparent text-paper hover:text-gold",
 } as const;
 
 const sizes = {
-  default: "px-[22px] py-[13px]",
-  compact: "px-4 py-[11px]",
+  default: "px-[26px] py-[15px]",
+  compact: "px-[18px] py-[11px]",
 } as const;
 
 type Variant = keyof typeof variants;
 type Size = keyof typeof sizes;
+
+const cls = (variant: Variant, size: Size, className: string) =>
+  `${base} ${variants[variant]} ${variant === "text" ? "px-0 py-[15px]" : sizes[size]} ${className}`;
+
+/** The trailing arrow. Kept out of the label so screen readers do not announce it. */
+export function Arrow() {
+  return (
+    <span aria-hidden="true" className="transition-transform duration-300 ease-enter group-hover/btn:translate-x-1">
+      →
+    </span>
+  );
+}
 
 export function ButtonLink({
   variant = "primary",
@@ -38,7 +45,7 @@ export function ButtonLink({
   className = "",
   ...props
 }: ComponentPropsWithoutRef<"a"> & { variant?: Variant; size?: Size }) {
-  return <a {...props} className={`${base} ${variants[variant]} ${sizes[size]} ${className}`} />;
+  return <a {...props} className={cls(variant, size, className)} />;
 }
 
 export function Button({
@@ -47,5 +54,5 @@ export function Button({
   className = "",
   ...props
 }: ComponentPropsWithoutRef<"button"> & { variant?: Variant; size?: Size }) {
-  return <button {...props} className={`${base} ${variants[variant]} ${sizes[size]} ${className}`} />;
+  return <button {...props} className={cls(variant, size, className)} />;
 }

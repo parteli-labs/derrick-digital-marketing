@@ -1,6 +1,7 @@
 import { Masthead } from "@/components/Masthead";
 import { Hero } from "@/components/Hero";
 import { Shift } from "@/components/Shift";
+import { Vista } from "@/components/Vista";
 import { Services } from "@/components/Services";
 import { Stats } from "@/components/Stats";
 import { Contact } from "@/components/Contact";
@@ -13,6 +14,7 @@ export default function Page() {
       <main>
         <Hero />
         <Shift />
+        <Vista />
         <Services />
         <Stats />
         <Contact />
