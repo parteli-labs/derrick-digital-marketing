@@ -6,7 +6,7 @@ export function DerrickMark({ className = "" }: { className?: string }) {
       strokeWidth="2.2"
       stroke="currentColor"
       aria-hidden="true"
-      className={`text-lime ${className}`}
+      className={`text-gold ${className}`}
     >
       <path d="M6 50 L15.5 4 M34 50 L24.5 4" />
       <path d="M13.4 15H26.6M11.2 26H28.8M9 37H31" />

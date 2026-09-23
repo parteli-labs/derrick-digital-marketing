@@ -1,21 +1,18 @@
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { markDataUri } from "./_assets/mark";
 import { BRAND } from "@/lib/brand";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = "Derrick Digital — three names come back. Be one of them.";
+export const alt = "Derrick Digital - Bring your brand into production.";
 
 /**
- * The hero lockup, rendered as the share card. Big Shoulders Black is vendored
- * rather than fetched at build time: the display face is the identity, and a
- * network hiccup must not silently swap it for a system sans.
+ * The hero headline, rendered as the share card. It is set in the sans that
+ * ships inside next/og rather than Libre Franklin: Satori needs a static TTF,
+ * and fetching one at build time would let a network hiccup silently change the
+ * card. Vendor a Libre Franklin TTF into app/_assets to match the page exactly.
  */
-export default async function OpengraphImage() {
-  const display = await readFile(join(process.cwd(), "app/_assets/BigShoulders-Black.ttf"));
-
+export default function OpengraphImage() {
   return new ImageResponse(
     (
       <div
@@ -27,48 +24,32 @@ export default async function OpengraphImage() {
           justifyContent: "space-between",
           background: BRAND.ink,
           padding: "64px 72px",
-          fontFamily: "Big Shoulders",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={markDataUri({ size: 44 })} width={44} height={57} alt="" />
-          <div style={{ display: "flex", flexDirection: "column", lineHeight: 0.82 }}>
-            <span style={{ fontSize: 34, color: BRAND.paper, letterSpacing: 1 }}>DERRICK</span>
-            <span style={{ fontSize: 34, color: BRAND.lime, letterSpacing: 1 }}>DIGITAL</span>
-          </div>
+          <img src={markDataUri({ size: 30 })} width={30} height={39} alt="" />
+          <span style={{ fontSize: 24, color: BRAND.paper, letterSpacing: 5 }}>DERRICK DIGITAL</span>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", lineHeight: 0.86 }}>
-          <span style={{ fontSize: 132, color: BRAND.paper }}>THREE NAMES</span>
-          <span style={{ fontSize: 132, color: BRAND.paper }}>COME BACK.</span>
-          <div style={{ display: "flex", alignItems: "center", marginTop: 8 }}>
-            <span
-              style={{
-                fontSize: 132,
-                color: BRAND.ink,
-                background: BRAND.lime,
-                padding: "0 14px",
-                transform: "skewX(-6deg)",
-              }}
-            >
-              BE ONE
-            </span>
-            <span style={{ fontSize: 132, color: BRAND.paper, marginLeft: 24 }}>OF THEM.</span>
-          </div>
+        <div style={{ display: "flex", flexDirection: "column", lineHeight: 1, letterSpacing: -4 }}>
+          <span style={{ fontSize: 112, color: BRAND.paper }}>Bring your brand</span>
+          <span style={{ fontSize: 112, color: BRAND.gold }}>into production.</span>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <span style={{ fontSize: 27, color: BRAND.dim, letterSpacing: 4 }}>
-            GEO · SEO · BRAND FOR THE OIL PATCH
-          </span>
-          <span style={{ fontSize: 27, color: BRAND.orange, letterSpacing: 4 }}>ALBERTA · WCSB</span>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            borderTop: `1px solid ${BRAND.forest}`,
+            paddingTop: 26,
+          }}
+        >
+          <span style={{ fontSize: 22, color: BRAND.dim, letterSpacing: 4 }}>GEO · SEO · BRAND</span>
+          <span style={{ fontSize: 22, color: BRAND.dim, letterSpacing: 4 }}>ALBERTA, CANADA</span>
         </div>
       </div>
     ),
-    {
-      ...size,
-      fonts: [{ name: "Big Shoulders", data: display, weight: 900, style: "normal" }],
-    },
+    size,
   );
 }

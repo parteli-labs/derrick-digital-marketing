@@ -1,34 +1,18 @@
 import type { Metadata } from "next";
-import { Big_Shoulders, Barlow, Barlow_Condensed } from "next/font/google";
+import { Libre_Franklin } from "next/font/google";
 import { site } from "@/lib/content";
 import { shown } from "@/lib/evidence";
 import { EvidenceNotice } from "@/components/EvidenceNotice";
 import "./globals.css";
 
-// Google consolidated "Big Shoulders Display" into the variable "Big Shoulders" family.
-const bigShoulders = Big_Shoulders({
+// Libre Franklin is an open revival of Franklin Gothic, the long-standing
+// newspaper and corporate-report face: established rather than "tech". Weights
+// are exactly what the page renders: 200 for display, 300 for running text,
+// 400/500 for titles and labels, 600 for the wordmark and masthead links.
+const franklin = Libre_Franklin({
   subsets: ["latin"],
-  variable: "--font-big-shoulders",
-  display: "swap",
-  // next/font has no metric overrides for this family; ours live in globals.css.
-  adjustFontFallback: false,
-  fallback: ["Big Shoulders Fallback", "Arial Narrow", "Impact", "sans-serif"],
-});
-
-// Weights are exactly what the page renders. Barlow 500/700 and Condensed 500
-// were preloaded and never drawn — every `font-bold` in the codebase sits on an
-// element already set in Barlow Condensed.
-const barlow = Barlow({
-  subsets: ["latin"],
-  weight: ["400", "600"],
-  variable: "--font-barlow",
-  display: "swap",
-});
-
-const barlowCondensed = Barlow_Condensed({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  variable: "--font-barlow-condensed",
+  weight: ["200", "300", "400", "500", "600"],
+  variable: "--font-franklin",
   display: "swap",
 });
 
@@ -125,10 +109,14 @@ function StructuredData() {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en-CA"
-      className={`${bigShoulders.variable} ${barlow.variable} ${barlowCondensed.variable}`}
-    >
+    // `data-motion` is set by the script below before first paint; React never
+    // renders it, so the mismatch is expected.
+    <html lang="en-CA" className={franklin.variable} suppressHydrationWarning>
+      <head>
+        {/* Scroll reveals hide content only once this has run, so a visitor
+            whose script never loads still gets the whole page. */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.dataset.motion=''" }} />
+      </head>
       <body>
         {children}
         <StructuredData />

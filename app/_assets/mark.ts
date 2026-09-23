@@ -5,7 +5,7 @@ import { BRAND } from "@/lib/brand";
  * React components — favicon and Open Graph image generation. Kept in step with
  * components/DerrickMark.tsx by hand; it is nineteen lines and changes rarely.
  */
-export function markSvg({ size = 40, stroke = BRAND.lime }: { size?: number; stroke?: string } = {}) {
+export function markSvg({ size = 40, stroke = BRAND.gold }: { size?: number; stroke?: string } = {}) {
   const h = Math.round((size / 40) * 52);
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${h}" viewBox="0 0 40 52" fill="none" stroke="${stroke}" stroke-width="2.2">
   <path d="M6 50 L15.5 4 M34 50 L24.5 4"/>

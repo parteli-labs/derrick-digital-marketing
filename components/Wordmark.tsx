@@ -1,20 +1,16 @@
 import { DerrickMark } from "./DerrickMark";
 
 /**
- * The brand lockup: derrick mark plus the stacked wordmark, at a fixed size.
- *
- * The 1.2rem is a property of the lockup, not a step on the type ramp — the
- * wordmark is drawn artwork that happens to be set in type, and it should not
- * rescale with the document's reading sizes. Keeping it here stops it reading as
- * an off-ramp literal in two separate files.
+ * The brand lockup: derrick mark plus a single tracked line of capitals, at a
+ * fixed size. The size is a property of the lockup, not a step on the type
+ * ramp — it should not rescale with the document's reading sizes.
  */
 export function Wordmark() {
   return (
-    <span className="flex items-center gap-2.5">
-      <DerrickMark className="block h-[34px] w-[26px] shrink-0" />
-      <span className="font-display text-[1.2rem]/[0.82] font-black uppercase">
-        <span className="block">Derrick</span>
-        <span className="block text-lime">Digital</span>
+    <span className="flex items-center gap-3">
+      <DerrickMark className="block h-6 w-[18px] shrink-0" />
+      <span className="whitespace-nowrap text-[0.75rem] font-semibold uppercase tracking-[0.16em] sm:text-[0.875rem] sm:tracking-[0.2em]">
+        Derrick Digital
       </span>
     </span>
   );
