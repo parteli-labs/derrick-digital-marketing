@@ -1,27 +1,31 @@
 "use client";
 
 import { useCallback, useId, useLayoutEffect, useRef, useState } from "react";
+import type { CSSProperties } from "react";
 import type { Service } from "@/lib/content";
+import { useReveal } from "./motion";
 
 /**
- * The Honest Affordance Rule: the whole tile highlights, so the whole tile is
- * the control.
+ * The Honest Affordance Rule: the whole column responds to the pointer — its
+ * top rule turns gold — so the whole column is the control.
  *
- * This is a button + labelled region rather than <details>/<summary>. The card
- * subgrids onto the shared row bands so the three cards line up, and a shared
- * band means an open drawer would stretch its closed neighbours to match. Only
- * the open card spans the answer band — which needs the open state in React,
- * and <details> keeps that state in the DOM where the grid cannot see it.
- * Button + aria-expanded + a region is the same disclosure contract: native
- * keyboard operation, announced state, no custom roles.
+ * The column subgrids onto seven shared row bands so the three line up, and
+ * every column always spans all seven, the answer band included. An open
+ * answer makes that band tall for all three, but the columns have no box or
+ * fill to stretch, so the only visible effect is space under the closed ones.
+ *
+ * A button + labelled region rather than <details>/<summary>, so the height can
+ * be animated against the real rendered content. Button + aria-expanded + a
+ * region is the same disclosure contract: native keyboard operation, announced
+ * state, no custom roles.
  */
-export function ServiceCard({ service }: { service: Service }) {
+export function ServiceCard({ service, delay = 0 }: { service: Service; delay?: number }) {
   const id = useId();
+  const revealRef = useReveal<HTMLElement>();
   const buttonId = `${id}-toggle`;
   const panelId = `${id}-panel`;
 
   const [open, setOpen] = useState(false);
-  const [settling, setSettling] = useState(false);
   const bodyRef = useRef<HTMLDivElement>(null);
   const anim = useRef<Animation | null>(null);
   const prevOpen = useRef(open);
@@ -37,10 +41,7 @@ export function ServiceCard({ service }: { service: Service }) {
     prevOpen.current = open;
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced || typeof body.animate !== "function") {
-      setSettling(false);
-      return;
-    }
+    if (reduced || typeof body.animate !== "function") return;
 
     anim.current?.cancel();
     const h = body.scrollHeight;
@@ -55,11 +56,9 @@ export function ServiceCard({ service }: { service: Service }) {
       },
     );
     anim.current = a;
-    setSettling(!open);
     const done = () => {
       anim.current = null;
       body.style.removeProperty("opacity");
-      setSettling(false);
     };
     a.onfinish = done;
     a.oncancel = done;
@@ -67,50 +66,40 @@ export function ServiceCard({ service }: { service: Service }) {
 
   return (
     <article
+      ref={revealRef}
+      style={{ "--reveal-delay": `${delay}s` } as CSSProperties}
       onClick={(e) => {
         if ((e.target as HTMLElement).closest("button,a")) return;
-        // Dragging to select copy inside the card shouldn't also work the drawer.
+        // Dragging to select copy inside the column shouldn't also work the drawer.
         if (!window.getSelection()?.isCollapsed) return;
         toggle();
       }}
-      /* Six shared bands while closed; the seventh is the answer, and only the
-         open card reaches it. That is what stops a closed card being stretched
-         to match its open neighbour. The band is held for the length of the
-         close animation, because dropping it first leaves the still-shrinking
-         answer overflowing the six bands, which grows them — and every other
-         card with them — for a frame. */
-      className={`group grid cursor-pointer grid-rows-subgrid gap-3 border-[3px] border-paper bg-ink-2 px-5 pt-[22px] pb-6 transition-[background-color,border-color,transform] duration-200 hover:-translate-y-1 hover:border-lime hover:bg-forest ${
-        open || settling ? "row-span-7" : "row-span-6"
-      }`}
+      /* Spacing below the column is its own bottom padding, which a subgrid adds
+         to its last band. Every column's last band is the answer band, so it
+         lands in the same place for all three; a row gap on the parent would
+         instead be split into the margins around every band. */
+      className="group u-reveal row-span-7 grid cursor-pointer grid-rows-subgrid border-t border-paper pt-[22px] pb-10 transition-[border-color] duration-300 hover:border-gold"
     >
-      <div className="font-display mb-1 text-figure font-black leading-[0.8] text-lime">
-        {service.tag}
-      </div>
+      <span className="u-label text-gold">{service.tag}</span>
 
-      <h3 className="text-title mb-4">{service.title}</h3>
-      <p className="text-body leading-[1.5] text-muted transition-colors duration-200 group-hover:text-muted-2">
-        {service.body}
-      </p>
+      <h3 className="mt-3 text-title font-normal">{service.title}</h3>
+      <p className="mt-3.5 text-body-md text-muted">{service.body}</p>
 
-      <ul className="flex list-none flex-col gap-1.5 p-0 pb-6">
+      <ul className="mt-[22px] flex list-none flex-col border-t border-line p-0 self-start">
         {service.bullets.map((b) => (
           <li
             key={b}
-            className="relative pl-4 text-body-md u-label-sm text-muted transition-colors duration-200 group-hover:text-muted-2"
+            className="group/item relative border-b border-line py-2.5 text-body-sm font-normal transition-[padding,color] duration-400 ease-enter hover:pl-[22px] hover:text-gold"
           >
-            <span className="absolute left-0 top-[0.52em] block h-0.5 w-2 bg-lime" />
+            <span className="absolute left-0 top-1/2 h-px w-0 bg-gold transition-[width] duration-400 ease-enter group-hover/item:w-3" />
             {b}
           </li>
         ))}
       </ul>
 
-      <div className="flex items-center justify-between gap-2.5 border-t-2 border-field pt-[15px] transition-colors duration-200 group-hover:border-lime/40">
-        <span className="u-label text-muted-2 transition-colors duration-200 group-hover:text-sage">
-          See results in
-        </span>
-        <b className="whitespace-nowrap font-display text-title font-black leading-none text-orange">
-          {service.firstMovement}
-        </b>
+      <div className="mt-[26px] flex flex-col gap-2">
+        <span className="u-label text-dim">First results</span>
+        <b className="whitespace-nowrap text-title font-light">{service.firstMovement}</b>
       </div>
 
       <button
@@ -119,13 +108,13 @@ export function ServiceCard({ service }: { service: Service }) {
         aria-expanded={open}
         aria-controls={panelId}
         onClick={toggle}
-        className="mt-1.5 flex cursor-pointer items-center gap-2.5 border-2 border-lime/[0.38] px-[13px] py-[11px] text-left text-body-md u-label-sm font-bold text-lime transition-[background-color,color,border-color] duration-200 group-hover:border-lime hover:bg-lime hover:text-ink focus-visible:bg-lime focus-visible:text-ink"
+        className="mt-6 flex cursor-pointer items-center gap-3 border-y border-line py-3.5 text-left text-body-sm font-normal text-paper transition-colors duration-300 hover:text-gold group-hover:border-gold/40"
       >
         {service.drawer.question}
-        <span className="relative ml-auto block h-[11px] w-[11px] shrink-0">
-          <span className="absolute left-0 right-0 top-[5px] h-0.5 bg-current" />
+        <span aria-hidden="true" className="relative ml-auto block size-[11px] shrink-0 text-gold">
+          <span className="absolute inset-x-0 top-[5px] h-px bg-current" />
           <span
-            className={`absolute bottom-0 left-[5px] top-0 w-0.5 bg-current transition-transform duration-[250ms] ease-[cubic-bezier(.2,.7,.3,1)] ${
+            className={`absolute inset-y-0 left-[5px] w-px bg-current transition-transform duration-[250ms] ease-enter ${
               open ? "scale-y-0" : ""
             }`}
           />
@@ -141,9 +130,7 @@ export function ServiceCard({ service }: { service: Service }) {
         className="overflow-hidden"
         style={open ? undefined : { height: 0 }}
       >
-        <p className="px-0.5 pb-1 pt-[15px] text-body-md leading-[1.56] text-muted-2">
-          {service.drawer.answer}
-        </p>
+        <p className="pt-4 text-body-sm text-muted">{service.drawer.answer}</p>
       </div>
     </article>
   );

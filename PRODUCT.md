@@ -101,9 +101,10 @@ Real and usable:
 
 - The client's oilfield background (confirmed) — the basis of the positioning claim.
 - The incumbent Wix site's copy and segment list.
-- The statistics band: `312` buyer prompts per audit, `5` engines monitored, and `0`
-  annual contracts. Authored as placeholders and since confirmed by the client, so they
-  publish. They carry `confirmed(...)` in `lib/content.ts`.
+- The statistics band: `312` buyer prompts per audit, `5` AI engines tracked monthly,
+  `3` disciplines under one team, and `21` days from audit to first fix. Authored as
+  placeholders and since confirmed by the client, so they publish. (`0` annual
+  contracts was dropped: with no clients yet it read as "zero contracts won".) They carry `confirmed(...)` in `lib/content.ts`.
 
 **Placeholders currently on the page that must not be treated as evidence.** These
 were authored to make the design concrete and are not client-supplied:

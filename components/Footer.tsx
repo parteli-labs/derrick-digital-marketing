@@ -9,14 +9,14 @@ export function Footer() {
   const phone = shown(site.phone);
 
   return (
-    <footer className="border-t-[3px] border-lime py-[clamp(44px,6vw,72px)]">
-      <div className="mx-auto max-w-[1280px] px-gut">
+    <footer className="border-t border-line py-[clamp(56px,7vw,96px)]">
+      <div className="mx-auto max-w-[1320px] px-gut">
         <div className="grid gap-[clamp(24px,4vw,48px)] pb-10 lg:grid-cols-[1.1fr_2.2fr]">
           <div>
             <Wordmark />
-            <p className="mt-4 max-w-[38ch] text-body-md leading-[1.5] text-muted">
-              Brand growth for the oil patch. Built in Alberta, for companies
-              that sell inside a service radius.
+            <p className="mt-5 max-w-[38ch] text-body-sm text-muted">
+              Brand growth for the oil patch. Built in Alberta, by people who
+              have worked it.
             </p>
           </div>
 
@@ -24,13 +24,13 @@ export function Footer() {
               not leave a gap where it used to be. */}
           <div className="grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] gap-[clamp(24px,4vw,48px)]">
             <div>
-              <h2 className="mb-3.5 u-label text-dim">Services</h2>
+              <h2 className="mb-4 u-label text-dim">Services</h2>
               <ul className="flex list-none flex-col p-0">
                 {footerLinks.services.map((l) => (
                   <li key={l.label}>
                     <a
                       href={l.href}
-                      className="block py-1.5 text-body-sm text-muted no-underline transition-colors duration-200 hover:text-lime"
+                      className="block py-1.5 text-body-sm text-muted no-underline transition-colors duration-300 hover:text-paper"
                     >
                       {l.label}
                     </a>
@@ -40,13 +40,13 @@ export function Footer() {
             </div>
 
             <div>
-              <h2 className="mb-3.5 u-label text-dim">Who we work with</h2>
+              <h2 className="mb-4 u-label text-dim">Who we work with</h2>
               <ul className="flex list-none flex-col p-0">
                 {footerLinks.segments.map((s) => (
                   <li key={s}>
                     <a
                       href="#contact"
-                      className="block py-1.5 text-body-sm text-muted no-underline transition-colors duration-200 hover:text-lime"
+                      className="block py-1.5 text-body-sm text-muted no-underline transition-colors duration-300 hover:text-paper"
                     >
                       {s}
                     </a>
@@ -57,13 +57,13 @@ export function Footer() {
 
             {(email || phone) && (
               <div>
-                <h2 className="mb-3.5 u-label text-dim">Contact</h2>
+                <h2 className="mb-4 u-label text-dim">Contact</h2>
                 <ul className="flex list-none flex-col p-0">
                   {email && (
                     <li>
                       <a
                         href={`mailto:${email}`}
-                        className="block py-1.5 text-body-sm text-muted no-underline transition-colors duration-200 hover:text-lime"
+                        className="block py-1.5 text-body-sm text-muted no-underline transition-colors duration-300 hover:text-paper"
                       >
                         {email}
                       </a>
@@ -73,7 +73,7 @@ export function Footer() {
                     <li>
                       <a
                         href={`tel:${phone.href}`}
-                        className="block py-1.5 text-body-sm text-muted no-underline transition-colors duration-200 hover:text-lime"
+                        className="block py-1.5 text-body-sm text-muted no-underline transition-colors duration-300 hover:text-paper"
                       >
                         {phone.display}
                       </a>
@@ -85,11 +85,11 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-4 border-t-2 border-field pt-[22px]">
-          <span className="u-label-sm text-dim">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6">
+          <span className="u-label text-dim">
             © {new Date().getFullYear()} {site.name}
           </span>
-          <span className="u-label-sm text-dim">53°32′N 113°30′W</span>
+          <span className="u-label text-dim">53°32′N 113°30′W</span>
         </div>
       </div>
     </footer>

@@ -12,21 +12,19 @@ export function EvidenceNotice() {
   if (items.length === 0) return null;
 
   return (
-    <details className="fixed bottom-0 left-0 right-0 z-[100] border-t-[3px] border-orange bg-ink text-paper">
+    <details className="fixed inset-x-0 bottom-0 z-[100] border-t border-garnet bg-ink text-paper">
       <summary className="flex cursor-pointer list-none items-center gap-3 px-4 py-2.5 [&::-webkit-details-marker]:hidden">
-        <span className="border-2 border-orange px-2 py-0.5 u-label-sm font-bold text-orange">
-          Not launchable
-        </span>
-        <span className="u-label-sm text-muted">
+        <span className="border border-garnet px-2 py-0.5 u-label text-garnet">Not launchable</span>
+        <span className="u-label text-muted">
           {items.length} item{items.length === 1 ? "" : "s"} awaiting the client — withheld from production
         </span>
-        <span className="ml-auto u-label-sm text-dim">Details</span>
+        <span className="ml-auto u-label text-dim">Details</span>
       </summary>
-      <ul className="flex list-none flex-col gap-2.5 border-t-2 border-field px-4 py-3.5">
+      <ul className="flex list-none flex-col gap-2.5 border-t border-line px-4 py-3.5">
         {items.map((i) => (
           <li key={i.label} className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-            <b className="u-label-sm font-bold text-lime">{i.label}</b>
-            <span className="max-w-[76ch] text-body-sm leading-[1.5] text-muted">{i.needs}</span>
+            <b className="u-label text-gold">{i.label}</b>
+            <span className="max-w-[76ch] text-body-sm text-muted">{i.needs}</span>
           </li>
         ))}
       </ul>
