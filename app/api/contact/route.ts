@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { contact } from "@/lib/content";
 
 export const runtime = "nodejs";
 
@@ -7,6 +8,7 @@ type Payload = {
   name?: string;
   company?: string;
   topic?: string;
+  revenue?: string;
   area?: string;
   email?: string;
   phone?: string;
@@ -17,6 +19,15 @@ type Payload = {
 
 const clean = (v: unknown, max = 2000) =>
   typeof v === "string" ? v.trim().slice(0, max) : "";
+
+/**
+ * Single-line fields end up in the subject, so line breaks and other control
+ * characters are flattened to spaces before they get there.
+ */
+const line = (v: unknown, max: number) => clean(v, max).replace(/[\u0000-\u001f\u007f]+/g, " ");
+
+const TOPICS: readonly string[] = contact.topics;
+const REVENUE_BANDS: readonly string[] = contact.revenueBands;
 
 const isEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 
@@ -56,7 +67,26 @@ function recordSend(ip: string) {
   }
 }
 
+/**
+ * The form only ever posts from this site, and browsers always send Origin on a
+ * POST. A request without one, or from another host, is a script and not a visitor.
+ */
+function sameOrigin(request: Request) {
+  const origin = request.headers.get("origin");
+  const host = request.headers.get("x-forwarded-host") ?? request.headers.get("host");
+  if (!origin || !host) return false;
+  try {
+    return new URL(origin).host === host;
+  } catch {
+    return false;
+  }
+}
+
 export async function POST(request: Request) {
+  if (!sameOrigin(request)) {
+    return NextResponse.json({ error: "Forbidden." }, { status: 403 });
+  }
+
   if (!request.headers.get("content-type")?.includes("application/json")) {
     return NextResponse.json({ error: "Malformed request." }, { status: 400 });
   }
@@ -91,12 +121,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true }, { status: 200 });
   }
 
-  const name = clean(body.name, 120);
-  const company = clean(body.company, 160);
-  const email = clean(body.email, 200);
-  const topic = clean(body.topic, 120) || "Not specified";
-  const area = clean(body.area, 160);
-  const phone = clean(body.phone, 60);
+  const name = line(body.name, 120);
+  const company = line(body.company, 160);
+  const email = line(body.email, 200);
+  // Only the options the form offers. Anything else is not from the form.
+  const topic = TOPICS.includes(line(body.topic, 120)) ? line(body.topic, 120) : "Not specified";
+  const revenue = REVENUE_BANDS.includes(line(body.revenue, 40)) ? line(body.revenue, 40) : "";
+  const area = line(body.area, 160);
+  const phone = line(body.phone, 60);
   const message = clean(body.message, 5000);
 
   if (!name || !company || !isEmail(email)) {
@@ -123,6 +155,7 @@ export async function POST(request: Request) {
     `Name:           ${name}`,
     `Company:        ${company}`,
     `Enquiry:        ${topic}`,
+    `Revenue (LY):   ${revenue || "—"}`,
     `Operating area: ${area || "—"}`,
     `Email:          ${email}`,
     `Phone:          ${phone || "—"}`,
